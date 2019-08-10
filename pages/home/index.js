@@ -42,6 +42,10 @@ const styles = theme => ({
 		fontSize: 16,
 		marginBottom: 16		
 	},
+	speakerColumn: {
+		height: 'calc(100vh - 64px)',
+		overflow: 'auto',
+	}
 });
 
 const Index = (props) => {
@@ -102,7 +106,7 @@ const Index = (props) => {
 
 		<Container maxWidth="xl">
 			<Grid container spacing={3}>
-				<Grid item xs={6}>
+				<Grid item xs={6} className={classes.speakerColumn}>
 					<Paper className={classes.paper}>
 						<Typography variant="h5" className={classes.sectionTitle}>
 							Speakers
