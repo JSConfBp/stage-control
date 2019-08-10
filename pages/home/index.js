@@ -1,30 +1,18 @@
 import React, { useState } from 'react'
 import fetch from 'isomorphic-unfetch'
-import classnames from 'classnames'
 import { withStyles } from '@material-ui/core/styles';
-import colors from '../../colors'
 
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Switch from '@material-ui/core/Switch';
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-
 
 import Status from '../../components/Status'
 import Speakers from '../../components/Speakers'
 import PresentationStates from '../../components/PresentationStates'
 import Colors from '../../components/Colors'
-
-import Cookies from 'universal-cookie';
 
 const styles = theme => ({
 	root: {
@@ -112,7 +100,10 @@ const Index = (props) => {
 							Speakers
 						</Typography>
 
-						<Speakers onClick={ item => onSpeakerSelect(item) } />
+						<Speakers 
+							currentSpeaker={ speaker }
+							onClick={ item => onSpeakerSelect(item) } 
+						/>
 					</Paper>
 				</Grid>
 				<Grid item xs={6}>

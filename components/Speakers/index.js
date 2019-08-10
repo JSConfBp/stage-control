@@ -14,12 +14,13 @@ const styles = theme => ({
     },
 })
 
-const Speakers = ({ classes, onClick } ) => {
+const Speakers = ({ classes, onClick, currentSpeaker } ) => {
     return (<List className={classes.root}>
         {speakers.map( speaker => (
         <ListItem 
             button
             onClick={ () => onClick(speaker) }
+            selected={ currentSpeaker && currentSpeaker.id === speaker.id }
         >
             <ListItemAvatar>              
                 <Avatar 
