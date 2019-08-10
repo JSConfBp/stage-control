@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import fetch from 'isomorphic-unfetch'
 import classnames from 'classnames'
 import { withStyles } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
 import colors from '../../colors'
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -18,6 +17,12 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
+
+
+import Status from '../../components/Status'
+import Speakers from '../../components/Speakers'
+import PresentationStates from '../../components/PresentationStates'
+import Colors from '../../components/Colors'
 
 import Cookies from 'universal-cookie';
 
@@ -37,87 +42,52 @@ const styles = theme => ({
 		fontSize: 16,
 		marginBottom: 16		
 	},
-	colorButton: {
-		width: 72,
-		marginBottom: 8,
-		marginRight: 8
-	},
-	redButton: {
-		color: theme.palette.getContrastText(colors.red),
-		backgroundColor: colors.red,
-		'&:hover': {
-		  backgroundColor: colors.red,
-		},
-	},
-	blueButton: {
-		color: theme.palette.getContrastText(colors.blue),
-		backgroundColor: colors.blue,
-		'&:hover': {
-		  backgroundColor: colors.blue,
-		},
-	},
-	greenButton: {
-		color: theme.palette.getContrastText(colors.green),
-		backgroundColor: colors.green,
-		'&:hover': {
-		  backgroundColor: colors.green,
-		},
-	},
-	yellowButton: {
-		color: theme.palette.getContrastText(colors.yellow),
-		backgroundColor: colors.yellow,
-		'&:hover': {
-		  backgroundColor: colors.yellow,
-		},
-	},
-	whiteButton: {
-		color: theme.palette.getContrastText(colors.white),
-		backgroundColor: colors.white,
-		'&:hover': {
-		  backgroundColor: colors.white,
-		},
-	},
-	blackButton: {
-		color: theme.palette.getContrastText(colors.black),
-		backgroundColor: colors.black,
-		'&:hover': {
-		  backgroundColor: colors.black,
-		},
-	},
-	chip: {
-		margin: theme.spacing(1),
-	},
-	avatar: {
-		margin: 10,
-		width: 60,
-		height: 60,
-	},
 });
 
-class Index extends React.Component {
+const Index = (props) => {
+	
+	const { classes } = props;
 
-	constructor(props) {
-		super(props)
+	const [ speaker, setSpeaker ] = useState(null)
+	const [ color, setColor ] = useState('')
+	const [ presentationState, setPresentationState ] = useState(false)
+	const [ midSlideState, setMidSlideState ] = useState(false)
 
-		this.state = {
-			ticketId: '',
-			modalOpen: false,
-			error: false,
-			loading: false,
+	const onSpeakerSelect = (selectedSpeaker) => {
+		setSpeaker(selectedSpeaker)
+		if (selectedSpeaker.color) {
+			setColor(selectedSpeaker.color)
 		}
 	}
 
-	
-
-	render() {
-		console.log(this.props)
-		const { classes } = this.props;
-	
-		function handleChange(event, newValue) {
-		  setValue(newValue);
+	const clearCurrentSpeaker = () => {
+		setSpeaker(null)
+		if (presentationState) {
+			setPresentationState(false)
 		}
+	}
+	
+	const onPresentationStateChange = (type, state) => {
+		if (!speaker) return;
+	
+		if (type === 'presentation') {
+			setPresentationState(state)
+			if (state) {
+				setMidSlideState(false)
+			}
+			if (speaker && speaker.color) {
+				setColor(speaker.color)
+			}
+		}
+		if (type === 'midsession') {
+			setMidSlideState(state)
+			if (state) {
+				setPresentationState(false)
+			}
+		}
+	}
 
-		return (<div className={classes.root}>
+	return (<div className={classes.root}>
 		
 		<Paper className={ classes.top }>
 			<Tabs
@@ -139,6 +109,8 @@ class Index extends React.Component {
 						<Typography variant="h5" className={classes.sectionTitle}>
 							Speakers
 						</Typography>
+
+						<Speakers onClick={ item => onSpeakerSelect(item) } />
 					</Paper>
 				</Grid>
 				<Grid item xs={6}>
@@ -147,70 +119,42 @@ class Index extends React.Component {
 							Status
 						</Typography>
 
-						<Chip
-							icon={<FaceIcon />}
-							label="Presentation active"
-							className={classes.chip}
-							color="secondary"
+						<Status 
+							speaker={ speaker }
+							presentationState={ presentationState }
+							midSlideState={ midSlideState }
+							color={ color }
+							clearSpeaker={ () => clearCurrentSpeaker() } 
 						/>
+				</Paper>
 
-<Divider light />
+				<Paper className={classes.paper}>
+					<Typography variant="h5" className={classes.sectionTitle}>
+						Presentation
+					</Typography>
 
-<Avatar alt="Remy Sharp" src="https://jsconfbp.com/static/f6374502c504eb6d34c71099a97f966c/05a89/isa_silveira.webp" className={classes.avatar} />
+					<PresentationStates 
+						onChange={ (...args) => onPresentationStateChange(...args)}
+						presentation={presentationState}
+						midsession={midSlideState}
+					/>
+				</Paper>
 
-					</Paper>
-					<Paper className={classes.paper}>
-						<Typography variant="h5" className={classes.sectionTitle}>
-							Presentation
-						</Typography>
-						<FormControlLabel
-        					control={<Switch checked={ false } onChange={ () => {} } />}
-        					label="Presentation active"
-      					/>
-						  <Divider light />
+				<Paper className={classes.paper}>
+					<Typography variant="h5" className={classes.sectionTitle}>
+						Colors
+					</Typography>
 
-						<FormControlLabel
-        					control={<Switch checked={ false } onChange={ () => {} } />}
-        					label="Mid session slides active"
-      					/>
-					</Paper>
-					<Paper className={classes.paper}>
+					<Colors onChange={ color => setColor(color) } />
+				</Paper>
+			</Grid>
+		</Grid>
+	</Container>
+</div>)
+};
 
-						<Typography variant="h5" className={classes.sectionTitle}>
-							Colors
-						</Typography>
-
-						<Button variant="contained" className={ classnames(classes.colorButton, classes.redButton) }>
-        					Red
-      					</Button>
-						<Button variant="contained" className={ classnames(classes.colorButton, classes.blueButton) }>
-        					Blue
-      					</Button>
-						<Button variant="contained" className={ classnames(classes.colorButton, classes.greenButton) }>
-        					Green
-      					</Button>
-						<Button variant="contained" className={ classnames(classes.colorButton, classes.yellowButton) }>
-        					Yellow
-      					</Button>
-						<Button variant="contained" className={ classnames(classes.colorButton, classes.whiteButton) }>
-        					White
-      					</Button>    
-						<Button variant="contained" className={ classnames(classes.colorButton, classes.blackButton) }>
-        					Black
-      					</Button>
-					</Paper>
-				</Grid>
-        	</Grid>
-		</Container>
-	</div>)
-	}
-
-
-	static getInitialProps({ req, store, auth }) {
-		return {}
-	}
-
+Index.getInitialProps = ({ req, store, auth }) => {
+	return {}
 }
-
 
 export default withStyles(styles)(Index);
