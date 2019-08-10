@@ -45,9 +45,7 @@ const styles = theme => ({
 });
 
 const Index = (props) => {
-	
 	const { classes } = props;
-
 	const [ speaker, setSpeaker ] = useState(null)
 	const [ color, setColor ] = useState('')
 	const [ presentationState, setPresentationState ] = useState(false)
@@ -68,9 +66,9 @@ const Index = (props) => {
 	}
 	
 	const onPresentationStateChange = (type, state) => {
-		if (!speaker) return;
+		
 	
-		if (type === 'presentation') {
+		if (speaker && type === 'presentation') {
 			setPresentationState(state)
 			if (state) {
 				setMidSlideState(false)
@@ -134,9 +132,10 @@ const Index = (props) => {
 					</Typography>
 
 					<PresentationStates 
-						onChange={ (...args) => onPresentationStateChange(...args)}
-						presentation={presentationState}
-						midsession={midSlideState}
+						onChange={ (...args) => onPresentationStateChange(...args) }
+						presentationEnabled={ !!speaker }
+						presentation={ presentationState }
+						midsession={ midSlideState }
 					/>
 				</Paper>
 

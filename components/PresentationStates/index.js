@@ -10,9 +10,16 @@ const styles = theme => ({
     },
 })
 
-const PresentationStates = ({ classes, onChange, presentation, midsession} ) => {
+const PresentationStates = ({ 
+    classes, 
+    onChange, 
+    presentationEnabled,
+    presentation, 
+    midsession
+} ) => {
     return (<>
         <FormControlLabel
+            disabled={ !presentationEnabled }
             control={<Switch checked={ presentation } 
             onChange={ (event) => onChange('presentation', event.target.checked) } />}
             label="Presentation active"
