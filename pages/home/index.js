@@ -43,11 +43,6 @@ const styles = theme => ({
 const Index = (props) => {
 	const { classes, initialStage } = props;
 
-	// set initial state from getInitialProps
-
-	console.log(initialStage)
-
-
 	const [ stage, setStage ] = useState(initialStage || {
 		event: 'css',
 		speaker: null,
@@ -62,7 +57,7 @@ const Index = (props) => {
 		setStage(newData)
 		clearTimeout(saveTimer)
 		saveTimer = setTimeout(async () => {
-			await fetch('/api/stage', 
+			await fetch('/api/stage',
 			{
 				headers: {
 					'Content-Type': 'application/json'
@@ -233,7 +228,6 @@ const Index = (props) => {
 </div>)};
 
 Index.getInitialProps = async ({ req, store, auth }) => {
-
 	let apiUrl = `http://${process.env.HOST}:${process.env.PORT}/api/stage`;
 
 	if (process.browser) {
