@@ -18,6 +18,7 @@ const Speakers = ({ classes, onClick, currentSpeaker } ) => {
     return (<List className={classes.root}>
         {speakers.map( speaker => (
         <ListItem 
+            key={ speaker.id }
             button
             onClick={ () => onClick(speaker) }
             selected={ currentSpeaker && currentSpeaker.id === speaker.id }

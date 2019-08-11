@@ -37,44 +37,87 @@ const styles = theme => ({
 });
 
 const Index = (props) => {
-	const { classes } = props;
-	const [ speaker, setSpeaker ] = useState(null)
-	const [ color, setColor ] = useState('')
-	const [ presentationState, setPresentationState ] = useState(false)
-	const [ midSlideState, setMidSlideState ] = useState(false)
+	const { classes, initialStage } = props;
 
-	const onSpeakerSelect = (selectedSpeaker) => {
-		setSpeaker(selectedSpeaker)
-		if (selectedSpeaker.color) {
-			setColor(selectedSpeaker.color)
+	// set initial state from getInitialProps
+
+	console.log(initialStage)
+
+
+	const [ stage, setStage ] = useState(initialStage || {
+		speaker: null,
+		color: '',
+		presentation: false,
+		midSlide: false,
+	})
+
+	let saveTimer = 0
+	const save = (data) => {
+		const newData = Object.assign({}, stage, data)
+		setStage(newData)
+		clearTimeout(saveTimer)
+		saveTimer = setTimeout(async () => {
+			await fetch('/api/stage', 
+			{
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				method: 'PUT',
+				body: JSON.stringify(newData)
+			});
+		},200)
+	}
+
+	const onSpeakerSelect = (speaker) => {
+		const data = {
+			speaker
 		}
+
+		if (speaker.color) {
+			data.color = speaker.color
+		}
+
+		save(data)
 	}
 
 	const clearCurrentSpeaker = () => {
-		setSpeaker(null)
-		if (presentationState) {
-			setPresentationState(false)
+		const data = {
+			speaker: null
 		}
+
+		if (stage.presentation) {
+			data.presentation = false
+		}
+		
+		save(data)
+	}
+
+	const onColorChange = (color) => {
+		save({ color })
 	}
 	
 	const onPresentationStateChange = (type, state) => {
-		
-	
-		if (speaker && type === 'presentation') {
-			setPresentationState(state)
+		const data = {}
+
+		if (stage.speaker && type === 'presentation') {
+			data.presentation = state
+
 			if (state) {
-				setMidSlideState(false)
+				data.midSlide = false
 			}
-			if (speaker && speaker.color) {
-				setColor(speaker.color)
+			if (stage.speaker && stage.speaker.color) {
+				data.color = stage.speaker.color
 			}
 		}
+
 		if (type === 'midsession') {
-			setMidSlideState(state)
+			data.midSlide = state
 			if (state) {
-				setPresentationState(false)
+				data.presentation = false
 			}
 		}
+
+		save(data)
 	}
 
 	return (<div className={classes.root}>
@@ -99,9 +142,8 @@ const Index = (props) => {
 						<Typography variant="h5" className={classes.sectionTitle}>
 							Speakers
 						</Typography>
-
 						<Speakers 
-							currentSpeaker={ speaker }
+							currentSpeaker={ stage.speaker }
 							onClick={ item => onSpeakerSelect(item) } 
 						/>
 					</Paper>
@@ -111,12 +153,11 @@ const Index = (props) => {
 						<Typography variant="h5" className={classes.sectionTitle}>
 							Status
 						</Typography>
-
 						<Status 
-							speaker={ speaker }
-							presentationState={ presentationState }
-							midSlideState={ midSlideState }
-							color={ color }
+							speaker={ stage.speaker }
+							presentationState={ stage.presentation }
+							midSlideState={ stage.midSlide }
+							color={ stage.color }
 							clearSpeaker={ () => clearCurrentSpeaker() } 
 						/>
 				</Paper>
@@ -125,12 +166,11 @@ const Index = (props) => {
 					<Typography variant="h5" className={classes.sectionTitle}>
 						Presentation
 					</Typography>
-
 					<PresentationStates 
 						onChange={ (...args) => onPresentationStateChange(...args) }
-						presentationEnabled={ !!speaker }
-						presentation={ presentationState }
-						midsession={ midSlideState }
+						presentationEnabled={ !!stage.speaker }
+						presentation={ stage.presentation }
+						midsession={ stage.midSlide }
 					/>
 				</Paper>
 
@@ -138,8 +178,7 @@ const Index = (props) => {
 					<Typography variant="h5" className={classes.sectionTitle}>
 						Colors
 					</Typography>
-
-					<Colors onChange={ color => setColor(color) } />
+					<Colors onChange={ color => onColorChange(color) } />
 				</Paper>
 			</Grid>
 		</Grid>
@@ -147,8 +186,28 @@ const Index = (props) => {
 </div>)
 };
 
-Index.getInitialProps = ({ req, store, auth }) => {
-	return {}
+Index.getInitialProps = async ({ req, store, auth }) => {
+
+	let apiUrl = `http://${process.env.HOST}:${process.env.PORT}/api/stage`;
+	
+	if (process.browser) {
+		apiUrl = '/api/stage'
+	}
+
+	const request = await fetch(
+		apiUrl, 
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			method: 'GET'
+		}
+	);
+	const initialStage = await request.json()
+
+	return {
+		initialStage
+	}
 }
 
 export default withStyles(styles)(Index);

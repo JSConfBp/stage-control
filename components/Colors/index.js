@@ -61,7 +61,8 @@ const styles = theme => ({
 const PresentationStates = ({ classes, onChange} ) => {
     return (<>
     {colors.variants.map( color => (
-        <Button 
+		<Button 
+			key={ color }
             onClick={ () => onChange(color) }
             variant="contained" 
             className={ classnames(classes.colorButton, classes[`${color}Button`]) }

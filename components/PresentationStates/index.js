@@ -24,12 +24,11 @@ const PresentationStates = ({
             onChange={ (event) => onChange('presentation', event.target.checked) } />}
             label="Presentation active"
         />
-            <Divider light />
-
+        <Divider light />
         <FormControlLabel
             control={<Switch checked={ midsession } 
             onChange={ (event) => onChange('midsession', event.target.checked) } />}
-            label="Mid session slides active"
+            label="Mid-session slides active"
         />
     </>)
 }

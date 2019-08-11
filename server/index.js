@@ -1,6 +1,7 @@
 const next = require('next')
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 const routeCache = require('route-cache');
 const SocketIO = require('socket.io');
 const cors = require('cors')
@@ -22,11 +23,14 @@ module.exports = function (getRoutes, config) {
 			.then((...args) => {
 
 				const server = express()
-				const httpServer = require('http').createServer(server);
+				const httpServer = require('http').createServer(server)
+				const io = SocketIO(httpServer)
+				
+				io.on('connection', () => { 
+					console.log('io connection')
+				})
 
-				const io = SocketIO(httpServer);
-				io.on('connection', () => { /* … */ });
-
+				server.io = io
 				server.use(cookieParser())
 				server.nextConfig = app.nextConfig
 				server.routeCache = routeCache
@@ -36,9 +40,9 @@ module.exports = function (getRoutes, config) {
 	}
 
 	const attachRoutes = (server) => {
-
-		server.get('/api/stage', stageHandler.put)
-		server.put('/api/stage', stageHandler.put)
+		const jsonParser = bodyParser.json()
+		server.get('/api/stage', jsonParser, stageHandler.get)
+		server.put('/api/stage', jsonParser, stageHandler.put)
 
 		/* server.use('/api/*', express.json())
 		server.post('/api/login', loginHandler)

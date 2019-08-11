@@ -12,8 +12,8 @@ const sassConfig = {
 }
 
 const nextConfig = {
-	port: process.env.PORT || 8000,
-	host: process.env.HOST || "0.0.0.0",
+	port: process.env.PORT,
+	host: process.env.HOST,
 
 	//transpileModules: [],
 

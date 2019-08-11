@@ -1,5 +1,4 @@
-
-// const store = require('./store')
+const store = require('./store')
 // const stageData = require('./stageData')
 
 module.exports.get = async (req, res) => {
@@ -10,9 +9,8 @@ module.exports.get = async (req, res) => {
 	// }
 
 	try {
-		// const data = await getStageData()
-		//Object.assign({}, data)
-		res.send('')
+		const data = await store.get('stage')
+		res.send(data)
 	} catch (e) {
 		res.sendStatus(403)
 	}
@@ -20,12 +18,10 @@ module.exports.get = async (req, res) => {
 
 module.exports.put = async (req, res) => {
 
-console.log(req);
-
 
 	try {
-
-		res.send('')
+		await store.set('stage', req.body)
+		res.send('OK')
 	} catch (e) {
 		console.error(e);
 
