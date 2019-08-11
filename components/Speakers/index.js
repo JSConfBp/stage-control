@@ -6,15 +6,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 
-import speakers from '../../speakers'
-
 const styles = theme => ({
 	root: {
 		flexGrow: 1,
     },
 })
 
-const Speakers = ({ classes, onClick, currentSpeaker } ) => {
+const Speakers = ({ classes, speakers, onClick, currentSpeaker } ) => {
     return (<List className={classes.root}>
         {speakers.map( speaker => (
         <ListItem 

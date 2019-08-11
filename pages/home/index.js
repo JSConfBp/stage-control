@@ -14,21 +14,25 @@ import Speakers from '../../components/Speakers'
 import PresentationStates from '../../components/PresentationStates'
 import Colors from '../../components/Colors'
 
+
+import js_speakers from '../../js-speakers'
+import css_speakers from '../../css-speakers'
+
 const styles = theme => ({
 	root: {
 		flexGrow: 1,
 	},
 	paper: theme.mixins.gutters({
 		padding: theme.spacing(2),
-		marginBottom: 16		
+		marginBottom: 16
 	}),
 	top: {
-		marginBottom: 16	
+		marginBottom: 16
 	},
 	sectionTitle: {
 		textTransform: 'uppercase',
 		fontSize: 16,
-		marginBottom: 16		
+		marginBottom: 16
 	},
 	speakerColumn: {
 		height: 'calc(100vh - 64px)',
@@ -45,6 +49,7 @@ const Index = (props) => {
 
 
 	const [ stage, setStage ] = useState(initialStage || {
+		event: 'css',
 		speaker: null,
 		color: '',
 		presentation: false,
@@ -88,7 +93,7 @@ const Index = (props) => {
 		if (stage.presentation) {
 			data.presentation = false
 		}
-		
+
 		save(data)
 	}
 
@@ -120,12 +125,50 @@ const Index = (props) => {
 		save(data)
 	}
 
+	const onEventChange = (event, index) => {
+		const data = {}
+
+		if (index === 0 && stage.event !== 'css') {
+			data.event = 'css'
+			data.speaker = null
+			data.color = ''
+			data.presentation = false
+			data.midSlide = false
+			save(data)
+		}
+		if (index === 1 && stage.event !== 'js') {
+			data.event = 'js'
+			data.speaker = null
+			data.color = ''
+			data.presentation = false
+			data.midSlide = false
+			save(data)
+		}
+	}
+
+	const getEventTabValue = (state) => {
+		if (!state.event) return 0;
+
+		if (state.event === 'css') return 0;
+
+		if (state.event === 'js') return 1;
+
+		return 0
+	}
+
+	const getSpeakers = (state) => {
+		if (state && state.event === 'css') return css_speakers;
+
+		if (state && state.event === 'js') return js_speakers;
+
+		return []
+	}
+
 	return (<div className={classes.root}>
-		
 		<Paper className={ classes.top }>
 			<Tabs
-				value={ 1 }
-				onChange={ (...args) => console.log(args) }
+				value={ getEventTabValue(stage) }
+				onChange={ (...args) => onEventChange(...args) }
 				indicatorColor="primary"
 				textColor="primary"
 				centered
@@ -137,17 +180,20 @@ const Index = (props) => {
 
 		<Container maxWidth="xl">
 			<Grid container spacing={3}>
+
 				<Grid item xs={6} className={classes.speakerColumn}>
 					<Paper className={classes.paper}>
 						<Typography variant="h5" className={classes.sectionTitle}>
 							Speakers
 						</Typography>
-						<Speakers 
+						<Speakers
+							speakers={ getSpeakers(stage) }
 							currentSpeaker={ stage.speaker }
-							onClick={ item => onSpeakerSelect(item) } 
+							onClick={ item => onSpeakerSelect(item) }
 						/>
 					</Paper>
 				</Grid>
+
 				<Grid item xs={6}>
 					<Paper className={classes.paper}>
 						<Typography variant="h5" className={classes.sectionTitle}>
@@ -166,7 +212,7 @@ const Index = (props) => {
 					<Typography variant="h5" className={classes.sectionTitle}>
 						Presentation
 					</Typography>
-					<PresentationStates 
+					<PresentationStates
 						onChange={ (...args) => onPresentationStateChange(...args) }
 						presentationEnabled={ !!stage.speaker }
 						presentation={ stage.presentation }
@@ -174,28 +220,28 @@ const Index = (props) => {
 					/>
 				</Paper>
 
-				<Paper className={classes.paper}>
+				{ stage && stage.event === 'js' && (<Paper className={classes.paper}>
 					<Typography variant="h5" className={classes.sectionTitle}>
 						Colors
 					</Typography>
 					<Colors onChange={ color => onColorChange(color) } />
-				</Paper>
+				</Paper>)}
+
 			</Grid>
 		</Grid>
 	</Container>
-</div>)
-};
+</div>)};
 
 Index.getInitialProps = async ({ req, store, auth }) => {
 
 	let apiUrl = `http://${process.env.HOST}:${process.env.PORT}/api/stage`;
-	
+
 	if (process.browser) {
 		apiUrl = '/api/stage'
 	}
 
 	const request = await fetch(
-		apiUrl, 
+		apiUrl,
 		{
 			headers: {
 				'Content-Type': 'application/json'
@@ -203,11 +249,18 @@ Index.getInitialProps = async ({ req, store, auth }) => {
 			method: 'GET'
 		}
 	);
-	const initialStage = await request.json()
+	try {
+		const initialStage = await request.json()
 
-	return {
-		initialStage
+		return {
+			initialStage
+		}
+	} catch(e) {
+		return {
+			initialStage: null
+		}
 	}
+
 }
 
 export default withStyles(styles)(Index);

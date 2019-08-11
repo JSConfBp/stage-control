@@ -98,17 +98,17 @@ const Status = ({
         label: presentationState ? 'Presentation active' : 'No active presentation',
         color: presentationState ? 'primary' : 'default',
 	}
-	
+
     const midslideChip = {
         label: midSlideState ? 'Mid-session slides active' : 'No mid-session slides',
         color: midSlideState ? 'secondary' : 'default',
 	}
-	
+
     const colorChip = {
         label: color ? `Color: ${color.toUpperCase()}` : 'No color',
         className: color ? classnames(classes.chip, classes[`${color}Color`]) : classnames(classes.chip)
 	}
-	
+
     const iconClass = color ? classes[`${color}Icon`] : '';
 
     return (<List className={classes.root}>
@@ -123,25 +123,25 @@ const Status = ({
                 className={classes.chip}
                 { ...midslideChip }
             />
-            <Chip
+            { color && (<Chip
                 icon={<ColorLensIcon className={iconClass} />}
                 className={classes.chip}
                 { ...colorChip }
-            />
+            />)}
         </ListItem>
-        
+
         <Divider light />
 
         { speaker && (<ListItem >
-            <ListItemAvatar>              
-                <Avatar 
-                    alt={ speaker.name } 
+            <ListItemAvatar>
+                <Avatar
+                    alt={ speaker.name }
                     src={ speaker.avatar }
                 />
             </ListItemAvatar>
-            <ListItemText 
-                primary={ speaker.name } 
-                secondary={ speaker.topic }  
+            <ListItemText
+                primary={ speaker.name }
+                secondary={ speaker.topic }
             />
 			 <ListItemSecondaryAction>
 				<IconButton edge="end" aria-label="remove" onClick={ () => clearSpeaker() }>
@@ -151,7 +151,5 @@ const Status = ({
         </ListItem>)}
     </List>)
 }
-
-
 
 export default withStyles(styles)(Status);
