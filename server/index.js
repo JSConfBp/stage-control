@@ -24,9 +24,13 @@ module.exports = function (getRoutes, config) {
 
 				const server = express()
 				const httpServer = require('http').createServer(server)
-				const io = SocketIO(httpServer)
+				const io = SocketIO(httpServer, {
+					path: 'socket',
+					cookie: false,
+					origins: '*',
+				})
 				
-				io.on('connection', () => { 
+				io.on('connection', () => {
 					console.log('io connection')
 				})
 
