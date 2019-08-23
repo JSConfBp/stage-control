@@ -19,7 +19,7 @@ module.exports.get = async (req, res) => {
 module.exports.put = async (req, res) => {
 	try {
 		await store.set('stage', req.body)
-		req.app.io.emit('broadcast', req.body);
+		req.app.io.emit('update', req.body);
 		res.send('OK')
 	} catch (e) {
 		console.error(e);

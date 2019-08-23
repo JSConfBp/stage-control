@@ -73,6 +73,4 @@ const PresentationStates = ({ classes, onChange} ) => {
     </>)
 }
 
-
-
 export default withStyles(styles)(PresentationStates);

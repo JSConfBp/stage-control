@@ -6,6 +6,7 @@ const routeCache = require('route-cache');
 const SocketIO = require('socket.io');
 const cors = require('cors')
 
+const store = require('./store')
 const router = require('./router')
 const errorHandler = require('./errorHandler')
 const stageHandler = require('./stageHandler')
@@ -13,61 +14,58 @@ const stageHandler = require('./stageHandler')
 const dev = process.env.NODE_ENV !== 'production'
 
 module.exports = function (getRoutes, config) {
-	const app = next({ dev, conf: config })
-	const handle = app.getRequestHandler()
-	const nextConfig = app.nextConfig
+	const nextApp = next({ dev, conf: config })
+	const handle = nextApp.getRequestHandler()
+	const nextConfig = nextApp.nextConfig
 
-	const initNext = (app) => {
-		return app
-			.prepare()
-			.then((...args) => {
+	const initNext = () => {
 
-				const server = express()
-				const httpServer = require('http').createServer(server)
-				const io = SocketIO(httpServer, {
-					path: 'socket',
-					cookie: false,
-					origins: '*',
-				})
-				
-				io.on('connection', () => {
-					console.log('io connection')
-				})
+		const app = express()
+		const server = require('http').Server(app)
+		//
+		const io = SocketIO(server, {
+			//path: '/api/socket',
+			serveClient: false,
+			//cookie: false,
+			//origins: '*',
+		})
 
-				server.io = io
-				server.use(cookieParser())
-				server.nextConfig = app.nextConfig
-				server.routeCache = routeCache
+		io.on('connection', async (socket) => {
+			console.log('io connection')
+			const stage = await store.get('stage')
+			socket.emit('update', stage);
+		})
 
-				return server
-			})
+		app.io = io
+		app.use(cookieParser())
+		app.routeCache = routeCache
+
+		return {
+			app,
+			server
+		}
 	}
 
-	const attachRoutes = (server) => {
+	const attachRoutes = ({ app, server }) => {
 		const jsonParser = bodyParser.json()
-		server.get('/api/stage', jsonParser, stageHandler.get)
-		server.put('/api/stage', jsonParser, stageHandler.put)
 
-		/* server.use('/api/*', express.json())
-		server.post('/api/login', loginHandler)
-		server.post('/api/user', userHandler.post)
-		server.delete('/api/user', userHandler.delete)
+		//app.use('/api/*', express.json())
+		app.get('/api/stage', jsonParser, stageHandler.get)
+		app.put('/api/stage', jsonParser, stageHandler.put)
 
-		server.get('/api/seats', cors(), routeCache.cacheSeconds(60), seatHandler.get) */
-
-		return server
+		return { app, server }
 	}
 
-	const attachNextRoutes = (server) => {
-		const routes = router(app, getRoutes)
+	const attachNextRoutes = ({ app, server }) => {
+		const routes = router(nextApp, getRoutes)
 
-		server.use('/', routes)
-		server.get('*', (req, res) => handle(req, res))
+		app.use('/', routes)
+		app.get('*', (req, res) => handle(req, res))
 
-		return server
+		return { app, server }
 	}
 
-	const startServer = (server) => {
+	const startServer = ({ app, server }) => {
 		const { port } = config
 
 		server.listen(port, (err) => {
@@ -76,7 +74,9 @@ module.exports = function (getRoutes, config) {
 		})
 	}
 
-	return Promise.resolve(app)
+
+
+	return nextApp.prepare()
 		.then(initNext)
 		.then(attachRoutes)
 		.then(attachNextRoutes)

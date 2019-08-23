@@ -14,7 +14,6 @@ import Speakers from '../../components/Speakers'
 import PresentationStates from '../../components/PresentationStates'
 import Colors from '../../components/Colors'
 
-
 import js_speakers from '../../js-speakers'
 import css_speakers from '../../css-speakers'
 
@@ -76,7 +75,6 @@ const Index = (props) => {
 		if (speaker.color) {
 			data.color = speaker.color
 		}
-
 		save(data)
 	}
 
@@ -254,7 +252,6 @@ Index.getInitialProps = async ({ req, store, auth }) => {
 			initialStage: null
 		}
 	}
-
 }
 
 export default withStyles(styles)(Index);
