@@ -84,6 +84,11 @@ const styles = theme => ({
         margin: theme.spacing(1),
         marginLeft: 0
 	},
+	status: {
+		paddingLeft: 0,
+		paddingRight: 0,
+		flexWrap: 'wrap'
+	}
 })
 
 const Status = ({ 
@@ -105,14 +110,14 @@ const Status = ({
 	}
 
     const colorChip = {
-        label: color ? `Color: ${color.toUpperCase()}` : 'No color',
+        label: color ? `${color.toUpperCase()}` : 'No color',
         className: color ? classnames(classes.chip, classes[`${color}Color`]) : classnames(classes.chip)
 	}
 
     const iconClass = color ? classes[`${color}Icon`] : '';
 
     return (<List className={classes.root}>
-        <ListItem >
+        <ListItem className={classes.status}>
             <Chip
                 icon={<FaceIcon />}
                 className={classes.chip}
