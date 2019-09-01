@@ -4,6 +4,8 @@ export default {
         'blue',
         'yellow',
         'green',
+        'orange',
+        'purple',
         'white',
         'black',
     ],
@@ -13,4 +15,6 @@ export default {
     green: '#43a447',
     white: '#ffffff',
     black: '#000000',
+    orange: '#ff8800',
+    purple: '#702cd6',
 }

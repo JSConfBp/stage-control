@@ -74,7 +74,7 @@ export default [
         name: 'Kat Kitay',
         topic: 'Web Norms of the World: An exploration of the internet beyond the West',
         avatar: 'https://jsconfbp.com/static/cb4f8d0b1d67a4c680fe828179907f11/42a0f/kat_kitay.webp',
-        color: 'white',
+        color: 'purple',
     },
     {
         id: 'tejas',
@@ -109,7 +109,7 @@ export default [
         name: 'Eva Ferreira',
         topic: 'Take on me, web browsers!',
         avatar: 'https://jsconfbp.com/static/d737546b2c2ce8f3136cf747a2201b8b/7a72d/eva_ferreira.webp',
-        color: 'red',
+        color: 'orange',
     },
     {
         id: 'liran',

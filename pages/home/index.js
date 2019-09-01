@@ -110,6 +110,7 @@ const Index = (props) => {
 
 		if (type === 'midsession') {
 			data.midSlide = state
+			data.color ='white'
 			if (state) {
 				data.presentation = false
 			}

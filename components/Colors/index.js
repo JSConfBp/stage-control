@@ -56,6 +56,20 @@ const styles = theme => ({
 		  backgroundColor: colors.black,
 		},
 	},
+	orangeButton: {
+		color: theme.palette.getContrastText(colors.orange),
+		backgroundColor: colors.orange,
+		'&:hover': {
+		  backgroundColor: colors.orange,
+		},
+	},
+	purpleButton: {
+		color: theme.palette.getContrastText(colors.purple),
+		backgroundColor: colors.purple,
+		'&:hover': {
+		  backgroundColor: colors.purple,
+		},
+	},
 })
 
 const PresentationStates = ({ classes, onChange} ) => {

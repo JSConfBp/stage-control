@@ -61,7 +61,21 @@ const styles = theme => ({
 		'&:hover': {
 		  backgroundColor: colors.black,
 		},
-    },
+	},
+	orangeColor: {
+		color: theme.palette.getContrastText(colors.orange),
+		backgroundColor: colors.orange,
+		'&:hover': {
+		  backgroundColor: colors.orange,
+		},
+	},
+	purpleColor: {
+		color: theme.palette.getContrastText(colors.purple),
+		backgroundColor: colors.purple,
+		'&:hover': {
+		  backgroundColor: colors.purple,
+		},
+	},
     redIcon: {
 		color: theme.palette.getContrastText(colors.red),
 	},
@@ -79,6 +93,12 @@ const styles = theme => ({
 	},
 	blackIcon: {
 		color: theme.palette.getContrastText(colors.black),
+	},
+	purpleIcon: {
+		color: theme.palette.getContrastText(colors.purple),
+	},
+	orangeIcon: {
+		color: theme.palette.getContrastText(colors.orange),
 	},
 	chip: {
         margin: theme.spacing(1),
