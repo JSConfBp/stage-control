@@ -72,7 +72,7 @@ const Index = (props) => {
 			speaker
 		}
 
-		if (speaker.color) {
+		if (!data.midSlide && speaker.color) {
 			data.color = speaker.color
 		}
 		save(data)
@@ -92,7 +92,7 @@ const Index = (props) => {
 
 	const onColorChange = (color) => {
 		if (data.midSlide) return;
-		
+
 		save({ color })
 	}
 	
