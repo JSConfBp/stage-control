@@ -68,20 +68,21 @@ const Index = (props) => {
 	}
 
 	const onSpeakerSelect = (speaker) => {
-		const data = {
+		const data = Object.assign({}, stage, {
 			speaker
-		}
+		})
 
 		if (!data.midSlide && speaker.color) {
 			data.color = speaker.color
 		}
+
 		save(data)
 	}
 
 	const clearCurrentSpeaker = () => {
-		const data = {
+		const data = Object.assign({}, stage, {
 			speaker: null
-		}
+		})
 
 		if (stage.presentation) {
 			data.presentation = false
@@ -91,15 +92,22 @@ const Index = (props) => {
 	}
 
 	const onColorChange = (color) => {
+		const data = Object.assign({}, stage, {
+			color
+		})
+
 		if (data.midSlide) return;
 
-		save({ color })
+		save(data)
 	}
 	
 	const onPresentationStateChange = (type, state) => {
-		const data = {}
+		const data = Object.assign({}, stage, {
+			speaker
+		})
 
-		if (stage.speaker && type === 'presentation') {
+
+		if (data.speaker && type === 'presentation') {
 			data.presentation = state
 
 			if (state) {
