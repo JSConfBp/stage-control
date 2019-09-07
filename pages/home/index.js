@@ -91,6 +91,8 @@ const Index = (props) => {
 	}
 
 	const onColorChange = (color) => {
+		if (data.midSlide) return;
+		
 		save({ color })
 	}
 	
