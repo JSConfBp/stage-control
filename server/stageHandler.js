@@ -10,6 +10,7 @@ module.exports.get = async (req, res) => {
 
 	try {
 		const data = await store.get('stage')
+		data.timestamp = new Date()
 		res.send(data)
 	} catch (e) {
 		res.sendStatus(403)
