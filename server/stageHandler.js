@@ -13,14 +13,14 @@ const getEventDay = (data) => {
 	// according to data.event & data.timestamp
 
 	// demo / mock
-	return 'css'
+	return 'js1'
 }
 
 const getDate = (data) => {
 	// return data.timestamp
 
 	// demo / mock
-	return new Date('Thu Sep 25 2019 15:14:00 GMT+0200');
+	return new Date('Thu Sep 26 2019 15:14:00 GMT+0200');
 }
 
 const comingUpNext = (data) => {
