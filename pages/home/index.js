@@ -104,7 +104,6 @@ const Index = (props) => {
 	const onPresentationStateChange = (type, state) => {
 		const data = Object.assign({}, stage)
 
-
 		if (data.speaker && type === 'presentation') {
 			data.presentation = state
 
