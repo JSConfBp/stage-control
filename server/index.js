@@ -50,6 +50,7 @@ module.exports = function (getRoutes, config) {
 		const jsonParser = bodyParser.json()
 
 		//app.use('/api/*', express.json())
+		app.options('/api/stage', cors()) 
 		app.get('/api/stage', cors(), jsonParser, stageHandler.get)
 		app.put('/api/stage', jsonParser, stageHandler.put)
 
