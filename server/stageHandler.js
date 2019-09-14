@@ -5,26 +5,12 @@ const schedule = require('../schedule.js')
 const cssSpeakers = require('../css-speakers.js')
 const jsSpeakers = require('../js-speakers.js')
 
-
-const getEventDay = (data) => {
-	console.log(data.timestamp.getDay());
-	
-	// return [css|js1|js2]
-	// according to data.event & data.timestamp
-
-	// demo / mock
-	return 'js1'
-}
-
 const getDate = (data) => {
-	// return data.timestamp
-
-	// demo / mock
-	return new Date('Thu Sep 26 2019 15:14:00 GMT+0200');
+	return data.timestamp
 }
 
 const comingUpNext = (data) => {
-	const eventDay = getEventDay(data)
+	const eventDay = data.event
 	const dailySchedule = schedule[eventDay]
 	const date = getDate(data)
 	const currentTime = parseInt(dayjs(date).format('HHmm'));
@@ -55,6 +41,8 @@ const comingUpNext = (data) => {
 					topic: sessionId
 				}
 			}
+
+			session.start = `${key.slice(0,2)}:${key.slice(2)}`
 
 			return session
 		})

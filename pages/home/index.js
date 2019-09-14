@@ -14,7 +14,8 @@ import Speakers from '../../components/Speakers'
 import PresentationStates from '../../components/PresentationStates'
 import Colors from '../../components/Colors'
 
-import js_speakers from '../../js-speakers'
+import js1_speakers from '../../js1-speakers'
+import js2_speakers from '../../js2-speakers'
 import css_speakers from '../../css-speakers'
 
 const styles = theme => ({
@@ -140,8 +141,16 @@ const Index = (props) => {
 			data.midSlide = false
 			save(data)
 		}
-		if (index === 1 && stage.event !== 'js') {
-			data.event = 'js'
+		if (index === 1 && stage.event !== 'js1') {
+			data.event = 'js1'
+			data.speaker = null
+			data.color = ''
+			data.presentation = false
+			data.midSlide = false
+			save(data)
+		}
+		if (index === 2 && stage.event !== 'js2') {
+			data.event = 'js2'
 			data.speaker = null
 			data.color = ''
 			data.presentation = false
@@ -155,7 +164,9 @@ const Index = (props) => {
 
 		if (state.event === 'css') return 0;
 
-		if (state.event === 'js') return 1;
+		if (state.event === 'js1') return 1;
+
+		if (state.event === 'js2') return 2;
 
 		return 0
 	}
@@ -163,7 +174,9 @@ const Index = (props) => {
 	const getSpeakers = (state) => {
 		if (state && state.event === 'css') return css_speakers;
 
-		if (state && state.event === 'js') return js_speakers;
+		if (state && state.event === 'js1') return js1_speakers;
+
+		if (state && state.event === 'js2') return js2_speakers;
 
 		return []
 	}
@@ -177,8 +190,9 @@ const Index = (props) => {
 				textColor="primary"
 				centered
 			>
-				<Tab label="CSSConf Budapest 2019" />
-				<Tab label="JSConf Budapest 2019" />
+				<Tab label="CSS" />
+				<Tab label="JS DAY 1" />
+				<Tab label="JS DAY 2" />
 			</Tabs>
 		</Paper>
 
@@ -224,7 +238,7 @@ const Index = (props) => {
 					/>
 				</Paper>
 
-				{ stage && stage.event === 'js' && (<Paper className={classes.paper}>
+				{ stage && stage.event.startsWith('js') && (<Paper className={classes.paper}>
 					<Typography variant="h5" className={classes.sectionTitle}>
 						Colors
 					</Typography>
