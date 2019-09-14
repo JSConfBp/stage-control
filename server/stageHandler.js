@@ -64,7 +64,12 @@ module.exports.get = async (req, res) => {
 module.exports.put = async (req, res) => {
 	try {
 		await store.set('stage', req.body)
-		req.app.io.emit('update', req.body);
+		const data = Object.assign({}, req.body, {
+			timestamp: new Date()
+		})
+		data.upcoming = comingUpNext(data)
+
+		req.app.io.emit('update', data);
 		res.send('OK')
 	} catch (e) {
 		console.error(e);
