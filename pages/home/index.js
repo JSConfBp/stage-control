@@ -160,6 +160,7 @@ const Index = (props) => {
 			data.logoOnly = state
 
 			if (state) {
+				data.color ='white'
 				data.presentation = false
 				data.midSlide = false
 				data.coffee = false
