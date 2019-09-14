@@ -10,8 +10,8 @@ const getDate = (data) => {
 }
 
 const comingUpNext = (data) => {
-	const eventDay = data.event
-	const dailySchedule = schedule[eventDay]
+	const { event } = data
+	const dailySchedule = schedule[event]
 	const date = getDate(data)
 	const currentTime = parseInt(dayjs(date).format('HHmm'));
 
@@ -30,19 +30,21 @@ const comingUpNext = (data) => {
 		.map(([key, sessionId]) => {
 			// match sessions to actual content
 			let session
-			if (eventDay.startsWith('js')) {
+			if (event.startsWith('js')) {
 				session = jsSpeakers.find(talk => talk.id === sessionId)
 			} else {
 				session = cssSpeakers.find(talk => talk.id === sessionId)
 			}
 
+			const start = `${key.slice(0,2)}:${key.slice(2)}`
 			if (!session) {
 				return {
+					start,
 					topic: sessionId
 				}
 			}
 
-			session.start = `${key.slice(0,2)}:${key.slice(2)}`
+			session.start = start
 
 			return session
 		})
