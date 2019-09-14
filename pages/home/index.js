@@ -89,6 +89,10 @@ const Index = (props) => {
 			data.presentation = false
 		}
 
+		if (!data.midSlide) {
+			data.logoOnly = true
+		}
+
 		save(data)
 	}
 
@@ -101,7 +105,7 @@ const Index = (props) => {
 
 		save(data)
 	}
-	
+
 	const onPresentationStateChange = (type, state) => {
 		const data = Object.assign({}, stage)
 
@@ -110,6 +114,9 @@ const Index = (props) => {
 
 			if (state) {
 				data.midSlide = false
+				data.coffee = false
+				data.lunch = false
+				data.logoOnly = false
 			}
 			if (stage.speaker && stage.speaker.color) {
 				data.color = stage.speaker.color
@@ -122,8 +129,41 @@ const Index = (props) => {
 
 			if (state) {
 				data.presentation = false
-			} else {
+				data.logoOnly = false
+			} else if (stage.speaker && stage.speaker.color) {
 				data.color = stage.speaker.color
+			}
+
+			if (!state) {
+				data.coffee = false
+				data.lunch = false
+			}
+		}
+
+		if (type === 'coffee') {
+			data.coffee = state
+
+			if (state) {
+				data.lunch = false
+			}
+		}
+
+		if (type === 'lunch') {
+			data.lunch = state
+
+			if (state) {
+				data.coffee = false
+			}
+		}
+
+		if (type === 'logoOnly') {
+			data.logoOnly = state
+
+			if (state) {
+				data.presentation = false
+				data.midSlide = false
+				data.coffee = false
+				data.lunch = false
 			}
 		}
 
@@ -139,6 +179,9 @@ const Index = (props) => {
 			data.color = ''
 			data.presentation = false
 			data.midSlide = false
+			data.coffee = false
+			data.lunch = false
+			data.logoOnly = true
 			save(data)
 		}
 		if (index === 1 && stage.event !== 'js1') {
@@ -147,6 +190,9 @@ const Index = (props) => {
 			data.color = ''
 			data.presentation = false
 			data.midSlide = false
+			data.coffee = false
+			data.lunch = false
+			data.logoOnly = true
 			save(data)
 		}
 		if (index === 2 && stage.event !== 'js2') {
@@ -155,6 +201,9 @@ const Index = (props) => {
 			data.color = ''
 			data.presentation = false
 			data.midSlide = false
+			data.coffee = false
+			data.lunch = false
+			data.logoOnly = true
 			save(data)
 		}
 	}
@@ -235,6 +284,9 @@ const Index = (props) => {
 						presentationEnabled={ !!stage.speaker }
 						presentation={ stage.presentation }
 						midsession={ stage.midSlide }
+						lunch={ stage.lunch }
+						coffee={ stage.coffee }
+						logoOnly={ stage.logoOnly }
 					/>
 				</Paper>
 
