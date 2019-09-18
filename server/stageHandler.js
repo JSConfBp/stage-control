@@ -6,7 +6,10 @@ const cssSpeakers = require('../css-speakers.js')
 const jsSpeakers = require('../js-speakers.js')
 
 const getDate = (data) => {
-	return data.timestamp
+	console.log((new Date()).getTimezoneOffset());
+	const tzOffset = (new Date()).getTimezoneOffset()
+	const msOffset = ((2 * 60) + tzOffset) * (60 * 1000);
+	return new Date(+data.timestamp + msOffset)
 }
 
 const comingUpNext = (data) => {
