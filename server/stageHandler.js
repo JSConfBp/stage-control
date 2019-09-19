@@ -3,7 +3,10 @@ const store = require('./store')
 
 const schedule = require('../schedule.js')
 const cssSpeakers = require('../css-speakers.js')
-const jsSpeakers = require('../js-speakers.js')
+const jsSpeakers = {
+	...require('../js1-speakers.js'),
+	...require('../js2-speakers.js'),
+}
 
 const getDate = (data) => {
 	console.log((new Date()).getTimezoneOffset());
