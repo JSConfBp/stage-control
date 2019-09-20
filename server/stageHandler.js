@@ -3,10 +3,10 @@ const store = require('./store')
 
 const schedule = require('../schedule.js')
 const cssSpeakers = require('../css-speakers.js')
-const jsSpeakers = {
+const jsSpeakers = [
 	...require('../js1-speakers.js'),
 	...require('../js2-speakers.js'),
-}
+]
 
 const getDate = (data) => {
 	console.log((new Date()).getTimezoneOffset());
@@ -42,7 +42,9 @@ const comingUpNext = (data) => {
 				session = cssSpeakers.find(talk => talk.id === sessionId)
 			}
 
-			const start = `${key.slice(0,2)}:${key.slice(2)}`
+			const paddedKey = key.padStart(4, '0');
+			const start = `${paddedKey.slice(0,2)}:${paddedKey.slice(2)}`
+
 			if (!session) {
 				return {
 					start,

@@ -188,7 +188,7 @@ const Index = (props) => {
 		if (index === 1 && stage.event !== 'js1') {
 			data.event = 'js1'
 			data.speaker = null
-			data.color = ''
+			data.color = 'white'
 			data.presentation = false
 			data.midSlide = false
 			data.coffee = false
@@ -199,7 +199,7 @@ const Index = (props) => {
 		if (index === 2 && stage.event !== 'js2') {
 			data.event = 'js2'
 			data.speaker = null
-			data.color = ''
+			data.color = 'white'
 			data.presentation = false
 			data.midSlide = false
 			data.coffee = false
