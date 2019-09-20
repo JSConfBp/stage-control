@@ -76,6 +76,9 @@ const Index = (props) => {
 		if (!data.midSlide && speaker.color) {
 			data.color = speaker.color
 		}
+		if (data.logoOnly) {
+			data.color = 'white'
+		}
 
 		save(data)
 	}
@@ -165,6 +168,8 @@ const Index = (props) => {
 				data.midSlide = false
 				data.coffee = false
 				data.lunch = false
+			} else if (!data.midSlide && data.speaker) {
+				data.color = data.speaker.color
 			}
 		}
 
