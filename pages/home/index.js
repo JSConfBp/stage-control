@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
 import { withStyles } from '@material-ui/core/styles';
 
@@ -8,6 +8,12 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
+
+import ErrorIcon from '@material-ui/icons/Error';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
+
 
 import Status from '../../components/Status'
 import Speakers from '../../components/Speakers'
@@ -42,6 +48,22 @@ const styles = theme => ({
 
 const Index = (props) => {
 	const { classes, initialStage } = props;
+	const [ token, setToken ] = useState('');
+	const [ errorNotification, setErrorNotification ] = useState(false);
+
+	const closeErrorNotification = () => {
+		setErrorNotification(false)
+	}
+
+	useEffect(() => {
+		const rawToken = (new URL(window.location.href)).searchParams.get('token')
+
+		if (rawToken) {
+			setToken(rawToken)
+		}
+
+		return () => {}
+	})
 
 	const [ stage, setStage ] = useState(initialStage || {
 		event: 'css',
@@ -52,19 +74,26 @@ const Index = (props) => {
 	})
 
 	let saveTimer = 0
+
 	const save = (data) => {
 		const newData = Object.assign({}, stage, data)
-		setStage(newData)
 		clearTimeout(saveTimer)
 		saveTimer = setTimeout(async () => {
-			await fetch('/api/stage',
+			const res = await fetch('/api/stage',
 			{
 				headers: {
+					token,
 					'Content-Type': 'application/json'
 				},
 				method: 'PUT',
 				body: JSON.stringify(newData)
 			});
+
+			if (res.status < 400) {
+				setStage(newData)
+			} else {
+				setErrorNotification(true)
+			}
 		},200)
 	}
 
@@ -306,14 +335,43 @@ const Index = (props) => {
 			</Grid>
 		</Grid>
 	</Container>
+	<Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        open={ errorNotification }
+        autoHideDuration={5000}
+        onClose={closeErrorNotification}
+      >
+		<SnackbarContent
+			aria-describedby="client-snackbar"
+			message={
+				<span id="client-snackbar">
+          			<ErrorIcon />
+          			Could not save stage
+        		</span>
+      		}
+    	/>
+	  </Snackbar>
 </div>)};
 
-Index.getInitialProps = async ({ req, store, auth }) => {
+Index.getInitialProps = async ({ req, res, store, auth }) => {
 	let apiUrl = `http://${process.env.HOST}:${process.env.PORT}/api/stage`;
 
 	if (process.browser) {
 		apiUrl = '/api/stage'
 	}
+
+	if (
+		!process.browser
+		&& process.env.ADMIN_TOKEN
+		&& process.env.ADMIN_TOKEN !== req.query.token
+	) {
+		res.status(401).send()
+		return
+	}
+
 
 	const request = await fetch(
 		apiUrl,
