@@ -18,6 +18,10 @@ module.exports = [
 		avatar: 'https://jlwagner.net/ext/jlwagner.jpg',
 	},
 	{
+		break: true,
+		name: 'Coffee break'
+	},
+	{
 		id: 'mike',
 		name: 'Mike Riethmuller ',
 		topic: 'CSS Architecture for Modern Web Applications',
@@ -30,6 +34,10 @@ module.exports = [
 		avatar: 'http://cssconfbp.rocks/assets/speakers/david.jpg',
 	},
 	{
+		break: true,
+		name: 'Lunch break'
+	},
+	{
 		id: 'steven',
 		name: 'Steven Roberts ',
 		topic: 'CSS Animation - Beyond Transitions',
@@ -40,6 +48,10 @@ module.exports = [
 		name: 'Kathrin Holzmann ',
 		topic: 'CSS in JS - beware the Hype!',
 		avatar: 'http://cssconfbp.rocks/assets/speakers/kathrin.jpg',
+	},
+	{
+		break: true,
+		name: 'Coffee break'
 	},
 	{
 		id: 'alan',

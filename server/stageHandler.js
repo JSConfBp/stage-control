@@ -73,10 +73,6 @@ module.exports.get = async (req, res) => {
 
 module.exports.put = async (req, res) => {
 
-console.log(process.env.ADMIN_TOKEN
-	,req.headers.token);
-
-
 	if (
 		process.env.ADMIN_TOKEN
 		&& process.env.ADMIN_TOKEN !== req.headers.token

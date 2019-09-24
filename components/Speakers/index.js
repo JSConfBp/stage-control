@@ -14,28 +14,34 @@ const styles = theme => ({
 
 const Speakers = ({ classes, speakers, onClick, currentSpeaker } ) => {
     return (<List className={classes.root}>
-        {speakers.map( speaker => (
-        <ListItem 
-            key={ speaker.id }
-            button
-            onClick={ () => onClick(speaker) }
-            selected={ currentSpeaker && currentSpeaker.id === speaker.id }
-        >
-            <ListItemAvatar>              
-                <Avatar 
-                    alt={ speaker.name } 
-                    src={ speaker.avatar }
-                />
-            </ListItemAvatar>
-            <ListItemText 
-                primary={ speaker.name } 
-                secondary={ speaker.topic }  
-            />
-        </ListItem>
-        ))}
+        {speakers.map( speaker => {
+            return speaker.break ? (
+                <ListItem>
+                    <ListItemText
+                        primary={ speaker.name }
+                    />
+                </ListItem>
+            ) : (
+                <ListItem
+                    key={ speaker.id }
+                    button
+                    onClick={ () => onClick(speaker) }
+                    selected={ currentSpeaker && currentSpeaker.id === speaker.id }
+                >
+                    <ListItemAvatar>
+                        <Avatar
+                            alt={ speaker.name }
+                            src={ speaker.avatar }
+                        />
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary={ speaker.name }
+                        secondary={ speaker.topic }
+                    />
+                </ListItem>
+            )
+        })}
     </List>)
 }
-
-
 
 export default withStyles(styles)(Speakers);

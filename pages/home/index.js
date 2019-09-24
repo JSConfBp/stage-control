@@ -10,10 +10,8 @@ import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 
 import ErrorIcon from '@material-ui/icons/Error';
-
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
-
 
 import Status from '../../components/Status'
 import Speakers from '../../components/Speakers'

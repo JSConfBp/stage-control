@@ -21,6 +21,10 @@ module.exports = [
         color: 'yellow',
     },
     {
+		break: true,
+		name: 'Coffee break'
+	},
+    {
         id: 'braden',
         name: 'Braden Moore',
         topic: 'Deciphering Brainwaves with the Web Audio API',
@@ -35,6 +39,10 @@ module.exports = [
         color: 'yellow',
     },
     {
+		break: true,
+		name: 'Lunch break'
+	},
+    {
         id: 'eva',
         name: 'Eva Ferreira',
         topic: 'Take on me, web browsers!',
@@ -48,6 +56,10 @@ module.exports = [
         avatar: 'https://jsconfbp.com/static/c1a3ce9c825af12e420d8756444f1f6c/7a72d/liran_tal.webp',
         color: 'blue',
     },
+    {
+		break: true,
+		name: 'Coffee break'
+	},
     {
         id: 'balazs',
         name: 'Korossy-Khayll, Balázs',

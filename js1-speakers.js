@@ -21,6 +21,10 @@ module.exports = [
         color: 'yellow',
     },
     {
+		break: true,
+		name: 'Coffee break'
+	},
+    {
         id: 'charlie',
         name: 'Charlie Gerard',
         topic: 'Weaving the web - Programming textile-based interactions in JavaScript',
@@ -35,6 +39,10 @@ module.exports = [
         color: 'green',
     },
     {
+		break: true,
+		name: 'Lunch break'
+	},
+    {
         id: 'adam',
         name: 'Adam Giese',
         topic: 'Composing music with composed functions',
@@ -48,6 +56,10 @@ module.exports = [
         avatar: 'https://jsconfbp.com/static/a9c029c4c6eecffca2b88d483a572cd5/80349/rebecca_hill.webp',
         color: 'green',
     },
+    {
+		break: true,
+		name: 'Coffee break'
+	},
     {
         id: 'stephanie',
         name: 'Stephanie Nemeth',
