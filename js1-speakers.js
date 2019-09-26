@@ -85,7 +85,7 @@ module.exports = [
     },
     {
         id: 'jakesurma',
-        name: 'Jake Archibald & Surma',
+        name: 'Surma & Jake Archibald',
         topic: 'Making things fast in world of build tools',
         avatar: 'https://jsconfbp.com/static/91bcd7c05917c76597769de2f1c380d7/1508f/jake_surma.webp',
         twitter: '@DasSurma & @jaffathecake',
