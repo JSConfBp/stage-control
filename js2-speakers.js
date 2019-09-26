@@ -2,7 +2,7 @@ module.exports = [
     {
         id: 'kat',
         name: 'Kat Kitay',
-        topic: 'Web Norms of the World: An exploration of the internet beyond the West',
+        topic: 'Web Norms of the World',
         avatar: 'https://jsconfbp.com/static/cb4f8d0b1d67a4c680fe828179907f11/42a0f/kat_kitay.webp',
         twitter: '@kkitay',
         color: 'purple',
