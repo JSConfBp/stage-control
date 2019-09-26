@@ -41,7 +41,7 @@ module.exports = [
         topic: 'Javascript Performance in Extreme Conditions: Building WebApps for the Refugee Aid Movement',
         avatar: 'https://jsconfbp.com/static/5cb3e6dab890b99cef8ec4b1e2260cf8/5ddc8/taylor_fairbank.webp',
         twitter: '',
-        color: 'green',
+        color: 'blue',
     },
     {
 		break: true,
