@@ -10,4 +10,7 @@ const server = require('./server')
 const routing = require('./routing')
 const config = require('./next.config')
 
+console.log(process.env);
+
+
 server(routing, config)
