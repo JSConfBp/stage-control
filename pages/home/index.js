@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
-import { withStyles } from '@material-ui/core/styles';
 
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Grid from '@material-ui/core/Grid';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Grid from '@mui/material/Grid';
 
-import ErrorIcon from '@material-ui/icons/Error';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
+import ErrorIcon from '@mui/icons-material/Error';
+import Snackbar from '@mui/material/Snackbar';
+import SnackbarContent from '@mui/material/SnackbarContent';
 
 import Status from '../../components/Status'
 import Speakers from '../../components/Speakers'
@@ -393,4 +392,4 @@ Index.getInitialProps = async ({ req, res, store, auth }) => {
 	}
 }
 
-export default withStyles(styles)(Index);
+export default Index

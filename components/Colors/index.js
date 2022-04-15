@@ -1,7 +1,6 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames'
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import colors from '../../colors'
 
 const styles = theme => ({
@@ -87,4 +86,4 @@ const PresentationStates = ({ classes, onChange} ) => {
     </>)
 }
 
-export default withStyles(styles)(PresentationStates);
+export default PresentationStates

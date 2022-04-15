@@ -2,7 +2,8 @@ if(process.env.NODE_ENV !== "production") {
 	require('dotenv').config()
 }
 
-const uuid = require('uuid/v4')
+// import { v4 as uuidv4 } from 'uuid';
+const { v4: uuid } = require('uuid')
 
 process.env.NONCE = uuid()
 

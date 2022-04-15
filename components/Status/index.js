@@ -1,19 +1,18 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import PhotoIcon from '@material-ui/icons/Photo';
-import ColorLensIcon from '@material-ui/icons/ColorLens';
-import CancelIcon from '@material-ui/icons/Cancel';
-import Divider from '@material-ui/core/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+import FaceIcon from '@mui/icons-material/Face';
+import PhotoIcon from '@mui/icons-material/Photo';
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+import CancelIcon from '@mui/icons-material/Cancel';
+import Divider from '@mui/material/Divider';
 import colors from '../../colors'
 
 const styles = theme => ({
@@ -177,4 +176,4 @@ const Status = ({
     </List>)
 }
 
-export default withStyles(styles)(Status);
+export default Status;
