@@ -3,7 +3,7 @@ const {createClient} = require('redis')
 const createStore = () => {
   let client
   if (process.env.NODE_ENV === 'production') {
-    client = createClient(process.env.REDIS_URL)
+    client = createClient({ url: process.env.REDIS_URL })
   } else {
     client = createClient({ host: process.env.REDIS_URL })
   }
