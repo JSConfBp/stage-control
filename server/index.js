@@ -28,7 +28,9 @@ module.exports = function (getRoutes, config) {
 			//path: '/api/socket',
 			serveClient: false,
 			//cookie: false,
-			//origins: '*',
+			cors: {
+				origin: true
+			}
 		})
 
 		io.on('connection', async (socket) => {
