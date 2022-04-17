@@ -1,64 +1,33 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
-import { MuiThemeProvider } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import JssProvider from 'react-jss/lib/JssProvider'
-import getPageContext from '../lib/getPageContext';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { CacheProvider } from '@emotion/react';
+import theme from '../theme';
+import createEmotionCache from '../createEmotionCache';
 import Route from '../components/Route'
 import routing from '../routing'
 
-class MyApp extends App {
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
-	constructor() {
-    super()
-    this.pageContext = getPageContext()
-	}
-
-	componentDidMount() {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
+export default function MyApp(props) {
+	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  
+	return (
+	  <CacheProvider value={emotionCache}>
+		<Head>
+		<title>Stage Control 2019</title>
+		  <meta name="viewport" content="initial-scale=1, width=device-width" />
+		</Head>
+		<ThemeProvider theme={theme}>
+		  {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+		  <CssBaseline />
+		  <Route.Provider value={routing()}>
+			<Component {...pageProps} />
+		</Route.Provider>	
+		</ThemeProvider>
+	  </CacheProvider>
+	);
   }
-
-	static async getInitialProps ({ Component, ctx }) {
-	  return {
-			pageProps: (Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
-	  }
-	}
-
-	render () {
-		const { Component, pageProps } = this.props
-
-	  return <Container>
-			<Head>
-				<title>Stage Control 2019</title>
-			</Head>
-			{/* Wrap every page in Jss and Theme providers */}
-			<JssProvider
-          registry={this.pageContext.sheetsRegistry}
-          generateClassName={this.pageContext.generateClassName}
-			>
-				{/* MuiThemeProvider makes the theme available down the React
-					tree thanks to React context. */}
-				<MuiThemeProvider
-					theme={this.pageContext.theme}
-					//sheetsManager={this.pageContext.sheetsManager}
-				>
-					{/* CssBaseline kickstart an elegant, consistent,
-						and simple baseline to build upon. */}
-					<CssBaseline />
-					<Route.Provider value={routing()}>
-						{/* Pass pageContext to the _document though the renderPage enhancer
-							to render collected styles on server-side. */}
-						<Component pageContext={this.pageContext} {...pageProps} />
-					</Route.Provider>
-				</MuiThemeProvider>
-			</JssProvider>
-		</Container>
-	}
-}
-export default MyApp
-//export default wrapWithAuth(MyApp)

@@ -1,14 +1,7 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import Divider from '@material-ui/core/Divider';
-
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-    },
-})
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Divider from '@mui/material/Divider';
 
 const PresentationStates = ({ 
     classes, 
@@ -56,4 +49,4 @@ const PresentationStates = ({
 
 
 
-export default withStyles(styles)(PresentationStates);
+export default PresentationStates;

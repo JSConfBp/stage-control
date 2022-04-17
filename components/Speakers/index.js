@@ -1,22 +1,15 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-    },
-})
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 
 const Speakers = ({ classes, speakers, onClick, currentSpeaker } ) => {
-    return (<List className={classes.root}>
-        {speakers.map( speaker => {
+    return (<List>
+        {speakers.map( (speaker, i) => {
             return speaker.break ? (
-                <ListItem>
+                <ListItem key={ `speaker-${i}` }>
                     <ListItemText
                         primary={ speaker.name }
                     />
@@ -44,4 +37,4 @@ const Speakers = ({ classes, speakers, onClick, currentSpeaker } ) => {
     </List>)
 }
 
-export default withStyles(styles)(Speakers);
+export default Speakers;

@@ -1,63 +1,53 @@
-
-const { promisify } = require('util')
-const redis = require('redis')
+const {createClient} = require('redis')
 
 const createStore = () => {
+  let client
   if (process.env.NODE_ENV === 'production') {
-    return redis.createClient(process.env.REDIS_URL)
+    client = createClient(process.env.REDIS_URL)
   } else {
-    return redis.createClient({ host: process.env.REDIS_URL })
+    client = createClient({ host: process.env.REDIS_URL })
   }
+
+  client.on('connect', () => console.log('Redis Client Connect'));
+  client.on('ready', () => console.log('Redis Client Ready'));
+  client.on('end', () => console.log('Redis Client End'));
+  client.on('reconnecting', () => console.log('Redis Client Reconnecting'));
+  client.on('error', (err) => console.log('Redis Client Error', err));
+
+  client.connect();
+  return client
 }
 
 const store = createStore()
-
 // migrate(store)
 
-const get = promisify(store.get).bind(store)
-const set = promisify(store.set).bind(store)
-const hset = promisify(store.hset).bind(store)
-const hget = promisify(store.hget).bind(store)
-const hgetall = promisify(store.hgetall).bind(store)
-const del = promisify(store.del).bind(store)
-const rpush = promisify(store.rpush).bind(store)
-const lrange = promisify(store.lrange).bind(store)
-const llen = promisify(store.llen).bind(store)
-const lindex = promisify(store.lindex).bind(store)
+exports.hset = async (hash, key, value) => store.HSET(hash, key, value)
+exports.hget = async (hash, key) => store.HGET(hash, key)
+exports.hgetall = async (hash) => store.HGETALL(hash)
 
-const sadd = promisify(store.sadd).bind(store)
-const smembers = promisify(store.smembers).bind(store)
+exports.rpush = async (list, ...values) => store.RPUSH(list, ...values)
+exports.lrange = async (list, from, to) => store.LRANGE(list, from, to)
+exports.llen = async (list) => store.llen(list)
+exports.lindex = async (list, index) => store.LINDEX(list, index)
+exports.lrem = async (list, index) => store.LREM(list, index)
 
-const zcard = promisify(store.zcard).bind(store)
-const zadd = promisify(store.zadd).bind(store)
-const zrange = promisify(store.zrange).bind(store)
+exports.zcard = async (set) => store.ZCARD(set)
+exports.zadd = async (set, score, item) => store.ZADD(set, score, item)
+exports.zrange = async (set, from, to) => store.ZRANGE(set, from, to)
 
-const lrem = promisify(store.lrem).bind(store)
+exports.sadd = async (set, item) => store.SADD(set, item)
+exports.smembers = async (set) => store.SMEMBERS(set)
 
-exports.hset = async (hash, key, value) => hset(hash, key, value)
-exports.hget = async (hash, key) => hget(hash, key)
-exports.hgetall = async (hash) => hgetall(hash)
-
-exports.rpush = async (list, ...values) => rpush(list, ...values)
-exports.lrange = async (list, from, to) => lrange(list, from, to)
-exports.llen = async (list) => llen(list)
-exports.lindex = async (list, index) => lindex(list, index)
-exports.lrem = async (list, index) => lrem(list, index)
-
-exports.zcard = async (set) => zcard(set)
-exports.zadd = async (set, score, item) => zadd(set, score, item)
-exports.zrange = async (set, from, to) => zrange(set, from, to)
-
-exports.sadd = async (set, item) => sadd(set, item)
-exports.smembers = async (set) => smembers(set)
-
-exports.set = async (key, value) => set(key, JSON.stringify(value))
-exports.get = async (key) => get(key).then(value => JSON.parse(value))
+exports.set = async (key, value) => store.set(key, JSON.stringify(value))
+exports.get = async (key) => {
+    const value = await store.get(key)
+    return JSON.parse(value)
+}
 exports.del = async (key) => {
   if (key instanceof Array) {
-    return del(...key).then(value => value)
+    return store.del(...key)
   } else {
-    return del(key).then(value => value)
+    return store.del(key)
   }
 }
 

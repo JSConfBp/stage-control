@@ -14,6 +14,7 @@ const stageHandler = require('./stageHandler')
 const dev = process.env.NODE_ENV !== 'production'
 
 module.exports = function (getRoutes, config) {
+	
 	const nextApp = next({ dev, conf: config })
 	const handle = nextApp.getRequestHandler()
 	const nextConfig = nextApp.nextConfig
@@ -60,7 +61,7 @@ module.exports = function (getRoutes, config) {
 	const attachNextRoutes = ({ app, server }) => {
 		const routes = router(nextApp, getRoutes)
 
-		app.use('/', routes)
+		// app.use('/', routes)
 		app.get('*', (req, res) => handle(req, res))
 
 		return { app, server }
