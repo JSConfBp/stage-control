@@ -60,13 +60,14 @@ const comingUpNext = (data) => {
 
 module.exports.get = async (req, res) => {
 	try {
+		console.log('GET stage')
+
 		const data = await store.get('stage')
 		data.timestamp = new Date()
-
 		data.upcoming = comingUpNext(data)
-
 		res.send(data)
 	} catch (e) {
+		console.log(e)
 		res.sendStatus(403)
 	}
 }

@@ -5,17 +5,11 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-    },
-})
-
 const Speakers = ({ classes, speakers, onClick, currentSpeaker } ) => {
-    return (<List className={classes.root}>
-        {speakers.map( speaker => {
+    return (<List>
+        {speakers.map( (speaker, i) => {
             return speaker.break ? (
-                <ListItem>
+                <ListItem key={ `speaker-${i}` }>
                     <ListItemText
                         primary={ speaker.name }
                     />

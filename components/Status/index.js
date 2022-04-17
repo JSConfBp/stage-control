@@ -1,5 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
+import { css, jsx } from '@emotion/react'
+import styled from '@emotion/styled'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -99,16 +101,23 @@ const styles = theme => ({
 	orangeIcon: {
 		color: theme.palette.getContrastText(colors.orange),
 	},
-	chip: {
-        margin: theme.spacing(1),
-        marginLeft: 0
-	},
-	status: {
-		paddingLeft: 0,
-		paddingRight: 0,
-		flexWrap: 'wrap'
-	}
+	
 })
+
+
+const MyChip = styled(Chip)`
+margin: 16px;
+margin:left: 0;
+`
+
+const getColorChip = (color) => styled(MyChip)(({ theme }) => ({
+	color: theme.palette.getContrastText(colors[color]),
+	backgroundColor: colors[color],
+	'&:hover': {
+	  backgroundColor: colors[color],
+	},
+}));
+
 
 const Status = ({ 
 	classes, 
@@ -130,28 +139,32 @@ const Status = ({
 
     const colorChip = {
         label: color ? `${color.toUpperCase()}` : 'No color',
-        className: color ? classnames(classes.chip, classes[`${color}Color`]) : classnames(classes.chip)
 	}
+
 
     const iconClass = color ? classes[`${color}Icon`] : '';
 
-    return (<List className={classes.root}>
-        <ListItem className={classes.status}>
-            <Chip
+    return (<List>
+        <ListItem css={css`
+			padding-left: 0;
+			padding-right: 0;
+			flex-wrap: wrap;
+		`}>
+            <MyChip
                 icon={<FaceIcon />}
-                className={classes.chip}
                 { ...presentationChip }
             />
-            <Chip
+            <MyChip
                 icon={<PhotoIcon />}
-                className={classes.chip}
                 { ...midslideChip }
             />
-            { color && (<Chip
-                icon={<ColorLensIcon className={iconClass} />}
-                className={classes.chip}
-                { ...colorChip }
-            />)}
+            { color && (() => { 
+				let ColorChip = getColorChip(color); 
+				return (<ColorChip
+                	icon={<ColorLensIcon className={iconClass} />}
+                	{ ...colorChip }
+            	/>)
+			})}
         </ListItem>
 
         <Divider light />

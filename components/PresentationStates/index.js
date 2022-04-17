@@ -3,12 +3,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Divider from '@mui/material/Divider';
 
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-    },
-})
-
 const PresentationStates = ({ 
     classes, 
     onChange, 

@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "@emotion/cache": "latest",
-    "@emotion/react": "latest",
+    "@emotion/react": "^11.9.0",
     "@emotion/server": "latest",
-    "@emotion/styled": "latest",
+    "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
     "@weco/next-plugin-transpile-modules": "^2.2.1",

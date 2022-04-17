@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
+import { css, jsx } from '@emotion/react'
+import styled from '@emotion/styled'
 
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -12,35 +14,24 @@ import ErrorIcon from '@mui/icons-material/Error';
 import Snackbar from '@mui/material/Snackbar';
 import SnackbarContent from '@mui/material/SnackbarContent';
 
-import Status from '../../components/Status'
-import Speakers from '../../components/Speakers'
-import PresentationStates from '../../components/PresentationStates'
-import Colors from '../../components/Colors'
+import Status from '../components/Status'
+import Speakers from '../components/Speakers'
+import PresentationStates from '../components/PresentationStates'
+import Colors from '../components/Colors'
 
-import js1_speakers from '../../js1-speakers'
-import js2_speakers from '../../js2-speakers'
-import css_speakers from '../../css-speakers'
+import js1_speakers from '../js1-speakers'
+import js2_speakers from '../js2-speakers'
+import css_speakers from '../css-speakers'
 
 const styles = theme => ({
-	root: {
-		flexGrow: 1,
-	},
-	paper: theme.mixins.gutters({
-		padding: theme.spacing(2),
-		marginBottom: 16
-	}),
-	top: {
-		marginBottom: 16
-	},
+
+
 	sectionTitle: {
 		textTransform: 'uppercase',
 		fontSize: 16,
 		marginBottom: 16
 	},
-	speakerColumn: {
-		height: 'calc(100vh - 64px)',
-		overflow: 'auto',
-	}
+	
 });
 
 const Index = (props) => {
@@ -262,8 +253,23 @@ const Index = (props) => {
 		return []
 	}
 
-	return (<div className={classes.root}>
-		<Paper className={ classes.top }>
+	const SubPaper = styled(Paper)`
+		padding: 32px;
+		margin-bottom: 16px
+	`
+
+	const SectionTitle = styled(Typography)`
+		text-transform: uppercase;
+		font-size: 16px
+		margin-bottom: 16px
+	`
+
+	return (<div  css={css`
+		flex-grow: 1
+	`}>
+		<Paper css={css`
+				margin-bottom: 16px
+			`}>
 			<Tabs
 				value={ getEventTabValue(stage) }
 				onChange={ (...args) => onEventChange(...args) }
@@ -280,24 +286,27 @@ const Index = (props) => {
 		<Container maxWidth="xl">
 			<Grid container spacing={3}>
 
-				<Grid item xs={6} className={classes.speakerColumn}>
-					<Paper className={classes.paper}>
-						<Typography variant="h5" className={classes.sectionTitle}>
+				<Grid item xs={6} css={css`
+					height: calc(100vh - 64px);
+					overflow: auto;
+				`}>
+					<SubPaper>
+						<SectionTitle variant="h5">
 							Speakers
-						</Typography>
+						</SectionTitle>
 						<Speakers
 							speakers={ getSpeakers(stage) }
 							currentSpeaker={ stage.speaker }
 							onClick={ item => onSpeakerSelect(item) }
 						/>
-					</Paper>
+					</SubPaper>
 				</Grid>
 
 				<Grid item xs={6}>
-					<Paper className={classes.paper}>
-						<Typography variant="h5" className={classes.sectionTitle}>
+					<SubPaper>
+						<SectionTitle variant="h5">
 							Status
-						</Typography>
+						</SectionTitle>
 						<Status 
 							speaker={ stage.speaker }
 							presentationState={ stage.presentation }
@@ -305,12 +314,12 @@ const Index = (props) => {
 							color={ stage.color }
 							clearSpeaker={ () => clearCurrentSpeaker() } 
 						/>
-				</Paper>
+				</SubPaper>
 
-				<Paper className={classes.paper}>
-					<Typography variant="h5" className={classes.sectionTitle}>
+				<SubPaper>
+					<SectionTitle variant="h5">
 						Presentation
-					</Typography>
+					</SectionTitle>
 					<PresentationStates
 						onChange={ (...args) => onPresentationStateChange(...args) }
 						presentationEnabled={ !!stage.speaker }
@@ -320,14 +329,14 @@ const Index = (props) => {
 						coffee={ stage.coffee }
 						logoOnly={ stage.logoOnly }
 					/>
-				</Paper>
+				</SubPaper>
 
-				{ stage && stage.event.startsWith('js') && (<Paper className={classes.paper}>
-					<Typography variant="h5" className={classes.sectionTitle}>
+				{ stage && stage.event.startsWith('js') && (<SubPaper>
+					<SectionTitle variant="h5">
 						Colors
-					</Typography>
+					</SectionTitle>
 					<Colors onChange={ color => onColorChange(color) } />
-				</Paper>)}
+				</SubPaper>)}
 
 			</Grid>
 		</Grid>
@@ -356,12 +365,12 @@ const Index = (props) => {
 Index.getInitialProps = async ({ req, res, store, auth }) => {
 	let apiUrl = `http://${process.env.HOST}:${process.env.PORT}/api/stage`;
 
-	if (process.browser) {
+	if (typeof window != "undefined") {
 		apiUrl = '/api/stage'
 	}
 
 	if (
-		!process.browser
+		! typeof window != "undefined"
 		&& process.env.ADMIN_TOKEN
 		&& process.env.ADMIN_TOKEN !== req.query.token
 	) {
@@ -369,7 +378,7 @@ Index.getInitialProps = async ({ req, res, store, auth }) => {
 		return
 	}
 
-
+	console.log(apiUrl)
 	const request = await fetch(
 		apiUrl,
 		{
