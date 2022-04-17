@@ -9,7 +9,7 @@ const jsSpeakers = [
 ]
 
 const getDate = (data) => {
-	console.log((new Date()).getTimezoneOffset());
+	// console.log((new Date()).getTimezoneOffset());
 	const tzOffset = (new Date()).getTimezoneOffset()
 	const msOffset = ((2 * 60) + tzOffset) * (60 * 1000);
 	return new Date(+data.timestamp + msOffset)
@@ -60,20 +60,17 @@ const comingUpNext = (data) => {
 
 module.exports.get = async (req, res) => {
 	try {
-		console.log('GET stage')
-
 		const data = await store.get('stage')
 		data.timestamp = new Date()
 		data.upcoming = comingUpNext(data)
 		res.send(data)
 	} catch (e) {
-		console.log(e)
+		console.error(e)
 		res.sendStatus(403)
 	}
 }
 
 module.exports.put = async (req, res) => {
-
 	if (
 		process.env.ADMIN_TOKEN
 		&& process.env.ADMIN_TOKEN !== req.headers.token

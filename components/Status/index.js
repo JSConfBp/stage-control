@@ -1,5 +1,4 @@
 import React from 'react'
-import classnames from 'classnames'
 import { css, jsx } from '@emotion/react'
 import styled from '@emotion/styled'
 import List from '@mui/material/List';
@@ -17,105 +16,20 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Divider from '@mui/material/Divider';
 import colors from '../../colors'
 
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-    },
-    redColor: {
-		color: theme.palette.getContrastText(colors.red),
-		backgroundColor: colors.red,
-		'&:hover': {
-		  backgroundColor: colors.red,
-		},
-	},
-	blueColor: {
-		color: theme.palette.getContrastText(colors.blue),
-		backgroundColor: colors.blue,
-		'&:hover': {
-		  backgroundColor: colors.blue,
-		},
-	},
-	greenColor: {
-		color: theme.palette.getContrastText(colors.green),
-		backgroundColor: colors.green,
-		'&:hover': {
-		  backgroundColor: colors.green,
-		},
-	},
-	yellowColor: {
-		color: theme.palette.getContrastText(colors.yellow),
-		backgroundColor: colors.yellow,
-		'&:hover': {
-		  backgroundColor: colors.yellow,
-		},
-	},
-	whiteColor: {
-		color: theme.palette.getContrastText(colors.white),
-		backgroundColor: colors.white,
-		'&:hover': {
-		  backgroundColor: colors.white,
-		},
-	},
-	blackColor: {
-		color: theme.palette.getContrastText(colors.black),
-		backgroundColor: colors.black,
-		'&:hover': {
-		  backgroundColor: colors.black,
-		},
-	},
-	orangeColor: {
-		color: theme.palette.getContrastText(colors.orange),
-		backgroundColor: colors.orange,
-		'&:hover': {
-		  backgroundColor: colors.orange,
-		},
-	},
-	purpleColor: {
-		color: theme.palette.getContrastText(colors.purple),
-		backgroundColor: colors.purple,
-		'&:hover': {
-		  backgroundColor: colors.purple,
-		},
-	},
-    redIcon: {
-		color: theme.palette.getContrastText(colors.red),
-	},
-	blueIcon: {
-		color: theme.palette.getContrastText(colors.blue),
-	},
-	greenIcon: {
-		color: theme.palette.getContrastText(colors.green),
-	},
-	yellowIcon: {
-		color: theme.palette.getContrastText(colors.yellow),
-	},
-	whiteIcon: {
-		color: theme.palette.getContrastText(colors.white),
-	},
-	blackIcon: {
-		color: theme.palette.getContrastText(colors.black),
-	},
-	purpleIcon: {
-		color: theme.palette.getContrastText(colors.purple),
-	},
-	orangeIcon: {
-		color: theme.palette.getContrastText(colors.orange),
-	},
-	
-})
-
-
 const MyChip = styled(Chip)`
-margin: 16px;
-margin:left: 0;
+	margin: 16px;
+	margin:left: 0;
 `
-
 const getColorChip = (color) => styled(MyChip)(({ theme }) => ({
 	color: theme.palette.getContrastText(colors[color]),
 	backgroundColor: colors[color],
 	'&:hover': {
 	  backgroundColor: colors[color],
 	},
+}));
+
+const getColorIcon = (color) => styled(ColorLensIcon)(({ theme }) => ({
+	color: theme.palette.getContrastText(colors[color]),
 }));
 
 
@@ -142,8 +56,6 @@ const Status = ({
 	}
 
 
-    const iconClass = color ? classes[`${color}Icon`] : '';
-
     return (<List>
         <ListItem css={css`
 			padding-left: 0;
@@ -160,8 +72,9 @@ const Status = ({
             />
             { color && (() => { 
 				let ColorChip = getColorChip(color); 
+				let ColorIcon = getColorIcon(color); 
 				return (<ColorChip
-                	icon={<ColorLensIcon className={iconClass} />}
+                	icon={<ColorIcon />}
                 	{ ...colorChip }
             	/>)
 			})}
