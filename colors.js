@@ -8,6 +8,12 @@ export default {
         'purple',
         'white',
         'black',
+        'skyblue',
+        'macncheese',
+        'lilac',
+        'cyan',
+        'jazzberry',
+        'heatherblue',
     ],
     red: '#DB3127',
     blue: '#3580C2',
@@ -15,6 +21,13 @@ export default {
     green: '#43a447',
     white: '#ffffff',
     black: '#000000',
-    orange: '#ff8800',
-    purple: '#702cd6',
+    orange: '#EC6E60',
+    purple: '#663399',
+
+    skyblue: '#87CEEB',
+    macncheese: '#ffbd88',
+    lilac: '#C8A2C8',
+    cyan: '#0EB8BE',
+    jazzberry: '#a50b5e',
+    heatherblue: '#6B83A4'
 }

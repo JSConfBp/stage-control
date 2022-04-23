@@ -21,7 +21,6 @@ import Colors from '../components/Colors'
 
 import js1_speakers from '../js1-speakers'
 import js2_speakers from '../js2-speakers'
-import css_speakers from '../css-speakers'
 
 const styles = theme => ({
 
@@ -54,7 +53,7 @@ const Index = (props) => {
 	})
 
 	const [ stage, setStage ] = useState(initialStage || {
-		event: 'css',
+		event: 'js1',
 		speaker: null,
 		color: '',
 		presentation: false,
@@ -196,18 +195,7 @@ const Index = (props) => {
 	const onEventChange = (event, index) => {
 		const data = {}
 
-		if (index === 0 && stage.event !== 'css') {
-			data.event = 'css'
-			data.speaker = null
-			data.color = ''
-			data.presentation = false
-			data.midSlide = false
-			data.coffee = false
-			data.lunch = false
-			data.logoOnly = true
-			save(data)
-		}
-		if (index === 1 && stage.event !== 'js1') {
+		if (index === 0 && stage.event !== 'js1') {
 			data.event = 'js1'
 			data.speaker = null
 			data.color = 'white'
@@ -218,7 +206,7 @@ const Index = (props) => {
 			data.logoOnly = true
 			save(data)
 		}
-		if (index === 2 && stage.event !== 'js2') {
+		if (index === 1 && stage.event !== 'js2') {
 			data.event = 'js2'
 			data.speaker = null
 			data.color = 'white'
@@ -234,18 +222,14 @@ const Index = (props) => {
 	const getEventTabValue = (state) => {
 		if (!state.event) return 0;
 
-		if (state.event === 'css') return 0;
+		if (state.event === 'js1') return 0;
 
-		if (state.event === 'js1') return 1;
-
-		if (state.event === 'js2') return 2;
+		if (state.event === 'js2') return 1;
 
 		return 0
 	}
 
 	const getSpeakers = (state) => {
-		if (state && state.event === 'css') return css_speakers;
-
 		if (state && state.event === 'js1') return js1_speakers;
 
 		if (state && state.event === 'js2') return js2_speakers;
@@ -277,7 +261,6 @@ const Index = (props) => {
 				textColor="primary"
 				centered
 			>
-				<Tab label="CSS" />
 				<Tab label="JS DAY 1" />
 				<Tab label="JS DAY 2" />
 			</Tabs>

@@ -1,22 +1,4 @@
 module.exports = {
-	css: {
-		0930: 'Opening CSSConf Budapest 2019',
-		0950: 'giulia',
-		1020: 'damien',
-		1050: 'jeremy',
-		1150: 'Coffee break',
-		1210: 'mike',
-		1240: 'david',
-		1310: 'Lunch break',
-		1430: 'steven',
-		1500: 'kathrin',
-		1530: 'Coffee break',
-		1615: 'alan',
-		1645: 'france-yuling',
-		1715: 'Closing & Family photo',
-		1745: 'Dinner',
-		2000: 'Party',
-	},
 	js1: {
 		0930: 'Opening JSConf Budapest 2019',
 		0950: 'mauricio',

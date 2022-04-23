@@ -2,7 +2,6 @@ const dayjs = require('dayjs')
 const store = require('./store')
 
 const schedule = require('../schedule.js')
-const cssSpeakers = require('../css-speakers.js')
 const jsSpeakers = [
 	...require('../js1-speakers.js'),
 	...require('../js2-speakers.js'),
@@ -36,12 +35,8 @@ const comingUpNext = (data) => {
 		.map(([key, sessionId]) => {
 			// match sessions to actual content
 			let session
-			if (event.startsWith('js')) {
-				session = jsSpeakers.find(talk => talk.id === sessionId)
-			} else {
-				session = cssSpeakers.find(talk => talk.id === sessionId)
-			}
-
+			session = jsSpeakers.find(talk => talk.id === sessionId)
+			
 			const paddedKey = key.padStart(4, '0');
 			const start = `${paddedKey.slice(0,2)}:${paddedKey.slice(2)}`
 
