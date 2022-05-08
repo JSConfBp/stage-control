@@ -1,41 +1,5 @@
 module.exports = [
     {
-        id: 'moran',
-        name: 'Moran Weber',
-        topic: '7±2 Reasons Psychology Will Help You Write Better Code',
-        avatar: 'https://jsconfbp.com/static/06fb80f8f6cde09b6fb64d9654e15c0f/32d98/moran-weber.webp',
-        twitter: '@moranweber',
-        color: 'heatherblue',
-    },
-    {
-        id: 'nick',
-        name: 'Nick Hehr',
-        topic: 'Offline IoT - Building Resilient Connected Devices without the Internet',
-        avatar: 'https://jsconfbp.com/static/ee750380a8661d23f589641a1b82de8b/416c3/nick-hehr.webp',
-        twitter: '@hipsterbrown',
-        color: 'red',
-    },
-    {
-        id: 'adrian',
-        name: 'Adrián Bolonio',
-        topic: 'Testing Web Accessibility',
-        avatar: 'https://jsconfbp.com/static/86a16d03eddfb479ba242d6a758eb043/416c3/adrian-bolonio.webp',
-        twitter: '@bolonio',
-        color: 'red',
-    },
-    {
-		break: true,
-		name: 'Coffee break'
-	},
-    {
-        id: 'tiger',
-        name: 'Tiger Oakes',
-        topic: 'Building interactive wall decor from junk phones',
-        avatar: 'https://jsconfbp.com/static/ef3a6e4d3720072242e2ef3264b7a28a/fc8b5/tiger-oakes.webp',
-        twitter: '@Not_Woods',
-        color: 'purple',
-    },
-    {
         id: 'gil',
         name: 'Gil Tayar',
         topic: 'Typed JavaScript? For real? The “type annotations” proposal and what it’s all about',
@@ -44,44 +8,56 @@ module.exports = [
         color: 'orange',
     },
     {
-		break: true,
-		name: 'Lunch break'
-	},
-    {
-        id: 'mathieu',
-        name: 'Mathieu Anderson',
-        topic: 'DX is UX',
-        avatar: 'https://jsconfbp.com/static/a7ae6ca94659f81066ee4f5d35c0ed30/416c3/mathieu-anderson.webp',
-        twitter: '@syllaband',
-        color: 'red',
+        id: 'nils',
+        name: 'Nils Binder',
+        topic: 'History of Art vs. Web Design vs. Frontend Development',
+        avatar: 'https://jsconfbp.com/static/4e3202e340ef8221af8da50b641035b5/32d98/nils-binder.webp',
+        twitter: '@supremebeing09',
+        color: 'purple',
     },
     {
-        id: 'roy',
-        name: 'Roy Derks',
-        topic: 'How Your Bundle Size Affects The Climate',
-        avatar: 'https://jsconfbp.com/static/2dba6a65e4251f989205be7456fade09/41584/roy-derks.webp',
-        twitter: '@gethackteam',
-        color: 'blue',
+        id: 'hidde',
+        name: 'Hidde de Vries',
+        topic: 'It\'s the markup that matters',
+        avatar: 'https://jsconfbp.com/static/0cd014ac6db3e7b863116642307ba2bb/c1587/hidde-de-vries.webp',
+        twitter: '@hdv',
+        color: 'green',
     },
+
     {
 		break: true,
 		name: 'Coffee break'
 	},
+
     {
-        id: 'alexandra',
-        name: 'Alexandra Sunderland',
-        topic: 'The emotional chaos of deploying code',
-        avatar: 'https://jsconfbp.com/static/2913e786e03ed021b9e63349641fab43/b5c5b/alexandra-sunderland.webp',
-        twitter: '@alexandras_dev',
-        color: 'jazzberry',
+        id: 'dan',
+        name: 'Dan Shappir',
+        topic: 'The ins and outs of Core Web Vitals',
+        avatar: 'https://jsconfbp.com/static/d0558962d0b3376f5a8f8112903d6b3c/21df2/dan-shappir.webp',
+        twitter: '@DanShappir',
+        color: 'blue',
     },
     {
-        id: 'sarah',
-        name: 'Sarah Saunders',
-        topic: 'Cool things to do with Voice Interfaces (and lots of things you shouldn\'t)',
-        avatar: 'https://jsconfbp.com/static/ecb4816fa514292b94d81d6c0591a666/21df2/sarah-saunders.webp',
-        twitter: '@sasaunde',
-        color: 'cyan',
+        id: 'moran',
+        name: 'Moran Weber',
+        topic: '7±2 Reasons Psychology Will Help You Write Better Code',
+        avatar: 'https://jsconfbp.com/static/06fb80f8f6cde09b6fb64d9654e15c0f/32d98/moran-weber.webp',
+        twitter: '@moranweber',
+        color: 'heatherblue',
+    },
+
+    {
+		break: true,
+		name: 'Lunch break'
+	},
+
+    {
+        id: 'crux',
+        name: 'Crux Conception',
+        topic: 'Is there #Stress in the world of #Tech?',
+        avatar: 'https://jsconfbp.com/static/5c369bc99763d19c0450aee6b0de9154/416c3/crux-conception.webp',
+        twitter: '@CruxConception',
+        color: 'purple',
     },
     {
         id: 'sam',
@@ -91,4 +67,43 @@ module.exports = [
         twitter: '@sambego',
         color: 'green',
     },
+    {
+        id: 'adrian',
+        name: 'Adrián Bolonio',
+        topic: 'Testing Web Accessibility',
+        avatar: 'https://jsconfbp.com/static/86a16d03eddfb479ba242d6a758eb043/416c3/adrian-bolonio.webp',
+        twitter: '@bolonio',
+        color: 'red',
+    },
+
+    {
+		break: true,
+		name: 'Coffee break'
+	},
+
+    {
+        id: 'sarah',
+        name: 'Sarah Saunders',
+        topic: 'Cool things to do with Voice Interfaces (and lots of things you shouldn\'t)',
+        avatar: 'https://jsconfbp.com/static/ecb4816fa514292b94d81d6c0591a666/21df2/sarah-saunders.webp',
+        twitter: '@sasaunde',
+        color: 'cyan',
+    },
+    {
+        id: 'mark',
+        name: 'Mark Brouch',
+        topic: 'The Doctor Will See You Now: Machine Learning for Telehealth',
+        avatar: 'https://jsconfbp.com/static/48f07257e6b5737ee180376cad2aaf16/32d98/mark-brouch.webp',
+        twitter: '@markbrouch',
+        color: 'black',
+    },
+    {
+        id: 'lucky',
+        name: 'Nhlanhla Lucky Nkosi',
+        topic: 'To kill a working drone: flying a drone with twitter, bananas & Web APIs',
+        avatar: 'https://jsconfbp.com/static/53fac4427e57700191b223e16b8fc685/416c3/nhlanhla-lucky-nkosi.webp',
+        twitter: '@NLucky_Nkosi',
+        color: 'macncheese',
+    },
+
 ]
