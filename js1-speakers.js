@@ -15,20 +15,19 @@ module.exports = [
         twitter: '@supremebeing09',
         color: 'purple',
     },
-    {
-        id: 'hidde',
-        name: 'Hidde de Vries',
-        topic: 'It\'s the markup that matters',
-        avatar: 'https://jsconfbp.com/static/0cd014ac6db3e7b863116642307ba2bb/c1587/hidde-de-vries.webp',
-        twitter: '@hdv',
-        color: 'green',
-    },
-
+    
     {
 		break: true,
 		name: 'Coffee break'
 	},
-
+    {
+        id: 'noa',
+        name: 'Noa Katsovich',
+        topic: 'What I\'ve learned on Being a better Engineer from being a Product Manager',
+        avatar: 'https://jsconfbp.com/static/a470bd67338e67278e606ead82c1ad3b/21df2/noa-katsovich.webp',
+        twitter: '@KatsovichNoa',
+        color: 'purple',
+    },
     {
         id: 'dan',
         name: 'Dan Shappir',
@@ -38,12 +37,12 @@ module.exports = [
         color: 'blue',
     },
     {
-        id: 'moran',
-        name: 'Moran Weber',
-        topic: '7±2 Reasons Psychology Will Help You Write Better Code',
-        avatar: 'https://jsconfbp.com/static/06fb80f8f6cde09b6fb64d9654e15c0f/32d98/moran-weber.webp',
-        twitter: '@moranweber',
-        color: 'heatherblue',
+        id: 'sarah',
+        name: 'Sarah Saunders',
+        topic: 'Cool things to do with Voice Interfaces (and lots of things you shouldn\'t)',
+        avatar: 'https://jsconfbp.com/static/ecb4816fa514292b94d81d6c0591a666/21df2/sarah-saunders.webp',
+        twitter: '@sasaunde',
+        color: 'cyan',
     },
 
     {
@@ -81,13 +80,14 @@ module.exports = [
 		name: 'Coffee break'
 	},
 
+
     {
-        id: 'sarah',
-        name: 'Sarah Saunders',
-        topic: 'Cool things to do with Voice Interfaces (and lots of things you shouldn\'t)',
-        avatar: 'https://jsconfbp.com/static/ecb4816fa514292b94d81d6c0591a666/21df2/sarah-saunders.webp',
-        twitter: '@sasaunde',
-        color: 'cyan',
+        id: 'moran',
+        name: 'Moran Weber',
+        topic: '7±2 Reasons Psychology Will Help You Write Better Code',
+        avatar: 'https://jsconfbp.com/static/06fb80f8f6cde09b6fb64d9654e15c0f/32d98/moran-weber.webp',
+        twitter: '@moranweber',
+        color: 'heatherblue',
     },
     {
         id: 'mark',

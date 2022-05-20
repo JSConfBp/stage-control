@@ -8,14 +8,7 @@ module.exports = [
         twitter: '@Mind_of_AC',
         color: 'skyblue',
     },
-    {
-        id: 'alexandra',
-        name: 'Alexandra Sunderland',
-        topic: 'The emotional chaos of deploying code',
-        avatar: 'https://jsconfbp.com/static/2913e786e03ed021b9e63349641fab43/b5c5b/alexandra-sunderland.webp',
-        twitter: '@alexandras_dev',
-        color: 'jazzberry',
-    },
+
     {
         id: 'rafal',
         name: 'Rafal Rumanek',
@@ -30,27 +23,6 @@ module.exports = [
 		name: 'Coffee break'
 	},
 
-    {
-        id: 'tiger',
-        name: 'Tiger Oakes',
-        topic: 'Building interactive wall decor from junk phones',
-        avatar: 'https://jsconfbp.com/static/ef3a6e4d3720072242e2ef3264b7a28a/fc8b5/tiger-oakes.webp',
-        twitter: '@Not_Woods',
-        color: 'purple',
-    },
-    {
-        id: 'nick',
-        name: 'Nick Hehr',
-        topic: 'Offline IoT - Building Resilient Connected Devices without the Internet',
-        avatar: 'https://jsconfbp.com/static/ee750380a8661d23f589641a1b82de8b/416c3/nick-hehr.webp',
-        twitter: '@hipsterbrown',
-        color: 'red',
-    },
-
-    {
-		break: true,
-		name: 'Lunch break'
-	},
 
     {
         id: 'anjana',
@@ -59,6 +31,38 @@ module.exports = [
         avatar: 'https://deploy-preview-53--jsconfbp2020.netlify.app/static/211b9892f14f39d06cf63bf65969bcf2/416c3/anjana-vakil.webp',
         twitter: '@AnjanaVakil',
         color: 'purple',
+    },
+    {
+        id: 'alexandra',
+        name: 'Alexandra Sunderland',
+        topic: 'The emotional chaos of deploying code',
+        avatar: 'https://jsconfbp.com/static/2913e786e03ed021b9e63349641fab43/b5c5b/alexandra-sunderland.webp',
+        twitter: '@alexandras_dev',
+        color: 'jazzberry',
+    },
+
+
+    {
+        id: 'tiger',
+        name: 'Tiger Oakes',
+        topic: 'Building interactive wall decor from junk phones',
+        avatar: 'https://jsconfbp.com/static/ef3a6e4d3720072242e2ef3264b7a28a/fc8b5/tiger-oakes.webp',
+        twitter: '@Not_Woods',
+        color: 'purple',
+    },
+   
+    {
+		break: true,
+		name: 'Lunch break'
+	},
+    
+    {
+        id: 'nick',
+        name: 'Nick Hehr',
+        topic: 'Offline IoT - Building Resilient Connected Devices without the Internet',
+        avatar: 'https://jsconfbp.com/static/ee750380a8661d23f589641a1b82de8b/416c3/nick-hehr.webp',
+        twitter: '@hipsterbrown',
+        color: 'red',
     },
     {
         id: 'mathieu',
@@ -98,13 +102,15 @@ module.exports = [
         twitter: '@gethackteam',
         color: 'blue',
     },
+
     {
-        id: 'noa',
-        name: 'Noa Katsovich',
-        topic: 'What I\'ve learned on Being a better Engineer from being a Product Manager',
-        avatar: 'https://jsconfbp.com/static/a470bd67338e67278e606ead82c1ad3b/21df2/noa-katsovich.webp',
-        twitter: '@KatsovichNoa',
-        color: 'purple',
+        id: 'hidde',
+        name: 'Hidde de Vries',
+        topic: 'It\'s the markup that matters',
+        avatar: 'https://jsconfbp.com/static/0cd014ac6db3e7b863116642307ba2bb/c1587/hidde-de-vries.webp',
+        twitter: '@hdv',
+        color: 'green',
     },
+
 
 ]
