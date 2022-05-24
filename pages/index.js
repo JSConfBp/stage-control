@@ -269,7 +269,7 @@ const Index = (props) => {
 		<Container maxWidth="xl">
 			<Grid container spacing={3}>
 
-				<Grid item xs={6} css={css`
+				<Grid item xs={12} md={6} css={css`
 					height: calc(100vh - 64px);
 					overflow: auto;
 				`}>
@@ -285,7 +285,7 @@ const Index = (props) => {
 					</SubPaper>
 				</Grid>
 
-				<Grid item xs={6}>
+				<Grid item xs={12} md={6} >
 					<SubPaper>
 						<SectionTitle variant="h5">
 							Status
