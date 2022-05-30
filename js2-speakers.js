@@ -27,7 +27,7 @@ module.exports = [
     {
         id: 'anjana',
         name: 'Anjana Vakil',
-        topic: 'Big Time Realtime: Streaming data with GraphQL',
+        topic: 'The Power of JS Generators',
         avatar: 'https://deploy-preview-53--jsconfbp2020.netlify.app/static/211b9892f14f39d06cf63bf65969bcf2/416c3/anjana-vakil.webp',
         twitter: '@AnjanaVakil',
         color: 'purple',

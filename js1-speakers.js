@@ -1,5 +1,13 @@
 module.exports = [
     {
+        id: 'intro',
+        name: 'The Organizers & The MC',
+        topic: 'JSConf Budapest 2022',
+        avatar: '',
+        twitter: '@jsconfbp & @TejasKumar_',
+        color: 'black',
+    },
+    {
         id: 'gil',
         name: 'Gil Tayar',
         topic: 'Typed JavaScript? For real? The “type annotations” proposal and what it’s all about',
