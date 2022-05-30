@@ -1,8 +1,8 @@
 module.exports = [
     {
         id: 'intro',
-        name: 'The Organizers & The MC',
-        topic: 'JSConf Budapest 2022',
+        name: 'JSConf Budapest 2022',
+        topic: 'The MC & The Organizers',
         avatar: '',
         twitter: '@jsconfbp & @TejasKumar_',
         color: 'black',
