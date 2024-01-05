@@ -33,11 +33,11 @@ const getColorIcon = (color) => styled(ColorLensIcon)(({ theme }) => ({
 }));
 
 
-const Status = ({ 
-	classes, 
-	speaker = null, 
-	presentationState = '', 
-	midSlideState = '', 
+const Status = ({
+	classes,
+	speaker = null,
+	presentationState = '',
+	midSlideState = '',
 	color = '',
 	clearSpeaker = () => {}
 } ) => {
@@ -70,9 +70,9 @@ const Status = ({
                 icon={<PhotoIcon />}
                 { ...midslideChip }
             />
-            { color && (() => { 
-				let ColorChip = getColorChip(color); 
-				let ColorIcon = getColorIcon(color); 
+            { color && (() => {
+				let ColorChip = getColorChip(color);
+				let ColorIcon = getColorIcon(color);
 				return (<ColorChip
                 	icon={<ColorIcon />}
                 	{ ...colorChip }

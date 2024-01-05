@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import fetch from 'isomorphic-unfetch'
+import { get } from '../services/store'
 import { css, jsx } from '@emotion/react'
 import styled from '@emotion/styled'
 
@@ -23,14 +23,12 @@ import js1_speakers from '../js1-speakers'
 import js2_speakers from '../js2-speakers'
 
 const styles = theme => ({
-
-
 	sectionTitle: {
 		textTransform: 'uppercase',
 		fontSize: 16,
 		marginBottom: 16
 	},
-	
+
 });
 
 const Index = (props) => {
@@ -41,16 +39,6 @@ const Index = (props) => {
 	const closeErrorNotification = () => {
 		setErrorNotification(false)
 	}
-
-	useEffect(() => {
-		const rawToken = (new URL(window.location.href)).searchParams.get('token')
-
-		if (rawToken) {
-			setToken(rawToken)
-		}
-
-		return () => {}
-	})
 
 	const [ stage, setStage ] = useState(initialStage || {
 		event: 'js1',
@@ -68,10 +56,6 @@ const Index = (props) => {
 		saveTimer = setTimeout(async () => {
 			const res = await fetch('/api/stage',
 			{
-				headers: {
-					token,
-					'Content-Type': 'application/json'
-				},
 				method: 'PUT',
 				body: JSON.stringify(newData)
 			});
@@ -290,12 +274,12 @@ const Index = (props) => {
 						<SectionTitle variant="h5">
 							Status
 						</SectionTitle>
-						<Status 
+						<Status
 							speaker={ stage.speaker }
 							presentationState={ stage.presentation }
 							midSlideState={ stage.midSlide }
 							color={ stage.color }
-							clearSpeaker={ () => clearCurrentSpeaker() } 
+							clearSpeaker={ () => clearCurrentSpeaker() }
 						/>
 				</SubPaper>
 
@@ -345,41 +329,25 @@ const Index = (props) => {
 	  </Snackbar>
 </div>)};
 
-Index.getInitialProps = async ({ req, res, store, auth }) => {
-	let apiUrl = `http://${process.env.HOST}:${process.env.PORT}/api/stage`;
+export const getServerSideProps = async () => {
 
-	if (typeof window != "undefined") {
-		apiUrl = '/api/stage'
-	}
-
-	if (
-		! typeof window != "undefined"
-		&& process.env.ADMIN_TOKEN
-		&& process.env.ADMIN_TOKEN !== req.query.token
-	) {
-		res.status(401).send()
-		return
-	}
-
-	console.log(apiUrl)
-	const request = await fetch(
-		apiUrl,
-		{
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			method: 'GET'
-		}
-	);
 	try {
-		const initialStage = await request.json()
+    const data = await get('stage')
+		data.timestamp = new Date()
+		data.upcoming = comingUpNext(data)
+		res.send(data)
+
 
 		return {
-			initialStage
+      props: {
+        initialStage: data
+      }
 		}
 	} catch(e) {
 		return {
-			initialStage: null
+      props: {
+			  initialStage: null
+      }
 		}
 	}
 }

@@ -1,8 +1,0 @@
-{
-  "watch": [
-    "server/**/*.js"
-  ],
-  "execMap": {
-    "js": "node"
-  }
-}

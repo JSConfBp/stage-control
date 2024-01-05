@@ -38,10 +38,9 @@ exports.zrange = async (set, from, to) => store.ZRANGE(set, from, to)
 exports.sadd = async (set, item) => store.SADD(set, item)
 exports.smembers = async (set) => store.SMEMBERS(set)
 
-exports.set = async (key, value) => store.set(key, JSON.stringify(value))
+exports.set = async (key, value) => store.set(key, value)
 exports.get = async (key) => {
-    const value = await store.get(key)
-    return JSON.parse(value)
+    return store.get(key)
 }
 exports.del = async (key) => {
   if (key instanceof Array) {
